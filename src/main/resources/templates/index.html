@@ -13,9 +13,9 @@
     <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
     <script th:src="@{/fotorama-4.6.4/fotorama.js}"></script>
 
-    <!--Splide-->
-    <link rel="stylesheet" th:href="@{/splide-2.4.21/dist/css/splide.min.css}">
-    <script th:src="@{/splide-2.4.21/dist/js/splide.min.js}"></script>
+    <!--Swiper-->
+    <link rel="stylesheet" th:href="@{/swiper-6.7.1/swiper-bundle.min.css}">
+    <script th:src="@{/swiper-6.7.1/swiper-bundle.min.js}"></script>
 
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
@@ -83,17 +83,36 @@
     </div>
 
     <section class="container white" id="artigos">
-        <div id="splide_helper">
-            <div class="splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/1.jpg}" alt=""></li>
-                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/2.jpg}" alt=""></li>
-                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/3.jpg}" alt=""></li>
-                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/4.jpg}" alt=""></li>
-                    </ul>
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
                 </div>
             </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
         </div>
     </section>
 

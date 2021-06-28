@@ -285,8 +285,9 @@ span.initial {
     align-items: center;
     justify-content: center;
 }
-#splide_helper {
-    width: 1280px;
+.swiper-container {
+    position: relative;
+    height: 80vh;
     overflow: hidden;
 }
 
