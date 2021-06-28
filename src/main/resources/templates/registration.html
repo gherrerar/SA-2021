@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/%22%3E">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+    <a th:href="@{/}">Voltar</a>
+
+    <!-- Mensagem de erro ou sucesso -->
+    <th:block th:include="mensagemRegistro"></th:block>
+
+    <form th:action="@{/registration}" method="post" th:object="${user}">
+        <label for="email"> Email </label> <input type="email" id="email" th:value="${email}"
+            name="email" required
+            autofocus="autofocus" />
+
+        <label for="password"> Senha </label> <input
+            name="password" type="password" id="password"
+            required autofocus="autofocus" th:value="${password}"/>
+
+        <button type="submit" class="btn">Registrar</button>
+        <span>Já está registrado? <a href="/" th:href="@{/login}">Clique aqui para entrar!</a></span>
+    </form>
+</body>
+</html>
