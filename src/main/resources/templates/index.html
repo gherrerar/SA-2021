@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    
+    <!--Fotorama-->
+    <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
+    <script th:src="@{/fotorama-4.6.4/fotorama.js}"></script>
+
+    <!--Splide-->
+    <link rel="stylesheet" th:href="@{/splide-2.4.21/dist/css/splide.min.css}">
+    <script th:src="@{/splide-2.4.21/dist/js/splide.min.js}"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>ESA | Início</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-toggle">
+            <svg class="hamburger hamRotate" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('opened')">
+                <path class="line top" d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"></path>
+                <path class="line middle" d="m 70,50 h -40"></path>
+                <path class="line bottom" d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"></path>
+            </svg>
+        </div>
+        <a class="logo" th:href="@{/}">Logo</a>
+        <ul class="main-nav">
+            <li><a class="nav-link selected" th:href="@{/}">Início</a></li>
+            <li><a class="nav-link" th:href="@{/sobre}">Sobre</a></li>
+            <li><a class="nav-link" th:href="@{/}">Projetos</a></li>
+            <li><a class="btn-signIn" th:href="@{/}">Entrar</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="home-desc">
+            <h1>ESA</h1>
+            <p><span class="initial">E</span>xposição da <span class="initial">S</span>emana de <span class="initial">A</span>rte</p>
+        </div>
+        <img class="home-img" th:src="@{/img/home_svg.svg}" alt="Mulher escrevendo publicações">
+        <img class="blob1" th:src="@{/img/blob1.svg}" alt="">
+    </header>
+
+    <div class="wave-container">
+        <svg width="1918" height="239" viewBox="0 0 1918 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-2 143L51.3333 132.3C104.667 122 211.333 100 318 73.7C424.667 47 531.333 15 638 4.30003C744.667 -5.99997 851.333 4.00003 958 31C1064.67 58 1171.33 100 1278 132.3C1384.67 164 1491.33 186 1598 175C1704.67 164 1811.33 122 1864.67 100.3L1918 79V239H1864.67C1811.33 239 1704.67 239 1598 239C1491.33 239 1384.67 239 1278 239C1171.33 239 1064.67 239 958 239C851.333 239 744.667 239 638 239C531.333 239 424.667 239 318 239C211.333 239 104.667 239 51.3333 239H-2V143Z" fill="#F6F6F6"/>
+        </svg>
+    </div>
+
+    <section class="container gray" id="destaques">
+        <h2>Confira alguns dos melhores trabalhos</h2>
+        <div id="fotorama_helper">
+            <div class="fotorama"
+            data-width="100%"
+            data-height="100%"
+            data-maxheight="720"
+            data-ratio="1280/720"
+            data-allowfullscreen="native" data-fit="cover" data-transition="slide" data-transitionduration="400" data-loop="true" data-autoplay="false"
+            data-arrows="true" data-click="true" data-swipe="true"
+            >
+                <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
+                <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
+                <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
+            </div>
+        </div>
+        
+    </section>
+    <div class="wave-container">
+        <svg width="1918" height="240" viewBox="0 0 1918 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-2 127.783L51.3333 111.81C104.667 95.8371 211.333 63.8914 318 58.6004C424.667 52.9101 531.333 74.8727 638 95.8371C744.667 116.801 851.333 138.764 958 170.41C1064.67 202.656 1171.33 244.584 1278 239.593C1384.67 234.601 1491.33 180.693 1598 154.438C1704.67 127.783 1811.33 127.783 1864.67 127.783L1918 127.783L1918 -1.90734e-06L1864.67 -1.90734e-06C1811.33 -1.90734e-06 1704.67 -1.90734e-06 1598 -1.90734e-06C1491.33 -1.90734e-06 1384.67 -1.90734e-06 1278 -1.90734e-06C1171.33 -1.90734e-06 1064.67 -1.90734e-06 958 -1.90734e-06C851.333 -1.90734e-06 744.667 -1.90734e-06 638 -1.90734e-06C531.333 -1.90734e-06 424.667 -1.90734e-06 318 -1.90734e-06C211.333 -1.90734e-06 104.667 -1.90734e-06 51.3333 -1.90734e-06L-2 -1.90734e-06L-2 127.783Z" fill="#F6F6F6"/>
+        </svg>
+    </div>
+
+    <section class="container white" id="artigos">
+        <div id="splide_helper">
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/1.jpg}" alt=""></li>
+                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/2.jpg}" alt=""></li>
+                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/3.jpg}" alt=""></li>
+                        <li class="splide__slide"><img th:src="@{https://s.fotorama.io/4.jpg}" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_top">
+            <div class="ftr-contact">
+                <h3>Entre em contato conosco</h3>
+                <div class="icons">
+
+                </div>
+            </div>
+            <ul class="ftr-list">
+                <li class="ftr-item">
+                    <p class="ftr-link">Início</p>
+                    <a class="ftr-sublink" th:href="@{/#destaques}">Destaques</a>
+                    <a class="ftr-sublink" th:href="@{/#artigos}">Artigos</a>
+                </li>
+                <li class="ftr-item">
+                    <p class="ftr-link">Sobre</p>
+                    <a class="ftr-sublink" th:href="@{/#}">Arte Urbana</a>
+                    <a class="ftr-sublink" th:href="@{/#}">Pop Art</a>
+                    <a class="ftr-sublink" th:href="@{/#}">Contato</a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div class="footer_bottom">
+            <h4>ESA</h4>
+            <a class="ftr-btn-signIn" th:href="@{/}">Entrar</a>
+        </div>
+    </footer>
+
+    <!--JS-->
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>

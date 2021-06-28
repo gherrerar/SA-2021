@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    
+    <!--Fotorama-->
+    <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
+    <script th:src="@{/fotorama-4.6.4/fotorama.js}"></script>
+
+    <!--Splide-->
+    <link rel="stylesheet" th:href="@{/splide-2.4.21/dist/css/splide.min.css}">
+    <script th:src="@{/splide-2.4.21/dist/js/splide.min.js}"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>ESA | Sobre</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-toggle">
+            <svg class="hamburger hamRotate" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('opened')">
+                <path class="line top" d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"></path>
+                <path class="line middle" d="m 70,50 h -40"></path>
+                <path class="line bottom" d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"></path>
+            </svg>
+        </div>
+        <a class="logo" th:href="@{/}">Logo</a>
+        <ul class="main-nav">
+            <li><a class="nav-link" th:href="@{/}">Início</a></li>
+            <li><a class="nav-link selected" th:href="@{/sobre}">Sobre</a></li>
+            <li><a class="nav-link" th:href="@{/}">Projetos</a></li>
+            <li><a class="btn-signIn" th:href="@{/}">Entrar</a></li>
+        </ul>
+    </nav>
+
+    <header id="about">
+        <div class="about-desc">
+            <h1>Conheça o evento</h1>
+            <p>A Semana de Arte é um evento realizado na Escola S com o intuito de provocar os estudantes a efetuarem obras artísticas 
+                de diferentes modalidades referentes aos movimentos da Arte Urbana e Pop Art.</p>
+        </div>
+    </header>
+
+    <div class="wave-container">
+        <svg width="1920" height="350" viewBox="0 0 1920 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1920 205L1760 239.209C1600 272.906 1280 342.094 960 348.5C640 354.906 320 301.094 160 273.29L9.00672e-06 246L3.05127e-05 -7.6299e-05L160 -6.23114e-05C320 -4.83237e-05 640 -2.03484e-05 960 7.62687e-06C1280 3.56022e-05 1600 6.35774e-05 1760 7.75651e-05L1920 9.15527e-05L1920 205Z" fill="#5EDB8C"/>
+        </svg>
+    </div>
+
+    <section class="container white" id="arte_urbana">
+        <img class="movement-img" th:src="@{/img/arte_urbana.svg}" alt="Lata de grafite, símbolo da Arte Urbana">
+        <div class="movement-desc">
+            <h2>Arte Urbana</h2>
+            <p>A <span class="initial">Arte Urbana</span> (ou Street Art, em inglês) remete a todas as intervenções artísticas que adotam como palco as cidades, especialmente os 
+                grandes centros urbanos, visando, mediante a consagração em espaços públicos de constante movimentação diária, o acesso dos cidadãos à arte sem que precisem se 
+                dirigir a espaços culturais, tais como museus, bibliotecas, teatros e cinemas.</p>
+        </div>
+    </section>
+
+    <section class="container white" id="pop_art">
+        <div class="movement-desc">
+            <h2>Pop Art</h2>
+            <p>Deixando legados incontestáveis para diferentes processos culturais - moda, design e quadrinhos, por exemplo -, a <span class="initial">Popular Art</span> é um 
+                movimento artístico reacionário ao expressionismo abstrato e à complexidade da arte moderna, marcado principalmente por caracterizações otimistas e postas em 
+                uma linguagem estética jovial, vista nos traços espessos, nas cores vibrantes e na serigrafia, para fomentar reproduções correlatas a mídias populares.</p>
+        </div>
+        <img class="movement-img" th:src="@{/img/pop_art.svg}" alt="HQ, legado da Pop Art">
+    </section>
+
+
+
+    <footer>
+        <div class="footer_top">
+            <div class="ftr-contact">
+                <h3>Entre em contato conosco</h3>
+                <div class="icons">
+
+                </div>
+            </div>
+            <ul class="ftr-list">
+                <li class="ftr-item">
+                    <p class="ftr-link">Início</p>
+                    <a class="ftr-sublink" th:href="@{/sobre/#}">Destaques</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#}">Artigos</a>
+                </li>
+                <li class="ftr-item">
+                    <p class="ftr-link">Sobre</p>
+                    <a class="ftr-sublink" th:href="@{/sobre/#arte_urbana}">Arte Urbana</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#pop_art}">Pop Art</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#}">Contato</a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div class="footer_bottom">
+            <h4>ESA</h4>
+            <a class="ftr-btn-signIn" th:href="@{/}">Entrar</a>
+        </div>
+    </footer>
+
+    <!--JS-->
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
