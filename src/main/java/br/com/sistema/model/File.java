@@ -24,14 +24,6 @@ public class File {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public byte[] getContent() {
         return content;
     }

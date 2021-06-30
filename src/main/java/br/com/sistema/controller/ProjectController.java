@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 
@@ -27,8 +28,8 @@ public class ProjectController {
         ModelAndView my = new ModelAndView("projects");
         List<Project> projects = projectService.findAll();
 
-        //reversão no array para sempre renderizar os posts mais novos.
-        Collections.reverse(projects);
+//        --> reversão no array para sempre renderizar os projetos mais novos.
+//        Collections.reverse(projects);
         my.addObject("projects", projects);
         return my;
     }
@@ -54,7 +55,12 @@ public class ProjectController {
     @PostMapping("/newproject")
     public String saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attributes){
         projectDto.setDate(LocalDate.now());
-        projectService.save(projectDto, files);
+        if(files.length > 1){
+            projectService.save(projectDto, files);
+        } else {
+            projectService.save(projectDto);
+        }
+
         return "redirect:/";
     }
 }

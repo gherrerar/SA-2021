@@ -1,6 +1,7 @@
 package br.com.sistema.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity

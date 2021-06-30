@@ -14,15 +14,16 @@ public class Project {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long project_id;
+    private long id;
 
     @NotBlank
     private String title;
 
-    @NotBlank
-    private String author;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 
-    @JsonFormat (shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
+    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate date;
 
     @NotBlank
@@ -32,23 +33,18 @@ public class Project {
     @OneToMany(mappedBy="project", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<File> files;
 
-    public Project() {
-    }
-
-    public Project(String title, String author, LocalDate date, String text, Collection<File> files) {
+    public Project(String title, User user, LocalDate date, String text, Collection<File> files) {
         this.title = title;
-        this.author = author;
+        this.user = user;
         this.date = date;
         this.text = text;
-        this.files = files;
     }
 
-    public long getId() {
-        return project_id;
-    }
-
-    public void setId(long id) {
-        this.project_id = id;
+    public Project(String title, User user, LocalDate date, String text) {
+        this.title = title;
+        this.user = user;
+        this.date = date;
+        this.text = text;
     }
 
     public String getTitle() {
@@ -59,12 +55,12 @@ public class Project {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDate getDate() {

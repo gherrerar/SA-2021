@@ -11,4 +11,5 @@ public interface ProjectService {
     List<Project> findAll();
     Project findById(long id);
     Project save(ProjectDto project, MultipartFile[] files);
+    Project save(ProjectDto projectDto);
 }

@@ -7,11 +7,10 @@
     <div>
       <form method="post" enctype="multipart/form-data" th:action="@{/newproject}" th:object="${project}">
         <input type="text" name="title" placeholder="Título" required>
-        <input type="text" name="author" placeholder="Autor" required>
         <input type="file" name="files" multiple/>
         <textarea type="text" name="text" placeholder="Texto" required></textarea>
         <button type="submit">Publicar</button>
-        <a href="/posts">Cancelar</a>
+        <a href="/">Cancelar</a>
       </form>
     </div>
 </body>
