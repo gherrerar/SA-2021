@@ -28,14 +28,14 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, @RequestParam("email") String email, @RequestParam("password") String password, RedirectAttributes attributes) {
-        if (userService.findUserByEmail(email)) {
+    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, RedirectAttributes attributes) {
+        if (userService.findUserByEmail(registrationDto.getEmail())) {
             userService.save(registrationDto);
             attributes.addFlashAttribute("mensagem", "O registro foi realizado com sucesso!");
         } else {
             attributes.addFlashAttribute("mensagem", "Este email já está cadastrado no sistema!");
-            attributes.addFlashAttribute("email", email);
-            attributes.addFlashAttribute("password", password);
+            attributes.addFlashAttribute("email", registrationDto.getEmail());
+            attributes.addFlashAttribute("password", registrationDto.getPassword());
         }
         return "redirect:/registration";
 

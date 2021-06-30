@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
 <head>
   <title>Projetos</title>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 </head>
 <body>
     <div>
-      <form method="post">
-        <input type="text" class="form-control" name="titulo" placeholder="Título *" required>
-        <input type="text" class="form-control" name="autor" placeholder="Autor *" required>
-        <textarea type="text" class="form-control" name="texto" placeholder="Texto *" required></textarea>
-        <small class="form-text text-muted">(*) Campos obrigatórios</small>
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Publicar</button>
-        <a href="/posts" class="btn btn-light" role="button" style="margin-top: 10px;">Cancelar</a>
+      <form method="post" enctype="multipart/form-data" th:action="@{/newproject}" th:object="${project}">
+        <input type="text" name="title" placeholder="Título" required>
+        <input type="text" name="author" placeholder="Autor" required>
+        <input type="file" name="files" multiple/>
+        <textarea type="text" name="text" placeholder="Texto" required></textarea>
+        <button type="submit">Publicar</button>
+        <a href="/posts">Cancelar</a>
       </form>
     </div>
 </body>

@@ -47,8 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/css/**",
                 "/img/**",
                 "/fotorama-4.6.4/**",
-                "splide-2.4.21/**",
-                "fontawesome-5.15.3").permitAll()
+                "/swiper-6.7.1/**",
+                "/fontawesome-5.15.3/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
