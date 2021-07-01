@@ -1,11 +1,11 @@
 package br.com.sistema.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ProjectDto {
     private String title;
     private String author;
-    private LocalDate date;
     private String text;
 
     public ProjectDto() {
@@ -14,7 +14,6 @@ public class ProjectDto {
     public ProjectDto(String title, String author, LocalDate date, String text) {
         this.title = title;
         this.author = author;
-        this.date = date;
         this.text = text;
     }
 
@@ -32,14 +31,6 @@ public class ProjectDto {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getText() {

@@ -2,19 +2,20 @@ package br.com.sistema.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name="project")
 public class Project {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    public long id;
 
     @NotBlank
     private String title;
@@ -23,28 +24,23 @@ public class Project {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate date;
+    public LocalDate date;
+
+    public String formattedDate;
 
     @NotBlank
     @Lob
     private String text;
 
-    @OneToMany(mappedBy="project", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<File> files;
-
-    public Project(String title, User user, LocalDate date, String text, Collection<File> files) {
-        this.title = title;
-        this.user = user;
-        this.date = date;
-        this.text = text;
+    public Project() {
     }
 
-    public Project(String title, User user, LocalDate date, String text) {
+    public Project(String title, User user, LocalDate date, String text, String formattedDate) {
         this.title = title;
         this.user = user;
         this.date = date;
         this.text = text;
+        this.formattedDate = formattedDate;
     }
 
     public String getTitle() {
@@ -79,11 +75,13 @@ public class Project {
         this.text = text;
     }
 
-    public Collection<File> getFiles() {
-        return files;
+    public String getUserName() {return user.getEmail();}
+
+    public String getFormattedDate() {
+        return formattedDate;
     }
 
-    public void setFiles(Collection<File> files) {
-        this.files = files;
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
     }
 }
