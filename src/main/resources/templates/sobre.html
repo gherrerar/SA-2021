@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -37,7 +37,8 @@
             <li><a class="nav-link" th:href="@{/}">Início</a></li>
             <li><a class="nav-link selected" th:href="@{/sobre}">Sobre</a></li>
             <li><a class="nav-link" th:href="@{/}">Projetos</a></li>
-            <li><a class="btn-signIn" th:href="@{/}">Entrar</a></li>
+            <li sec:authorize="!(isAuthenticated())"><a class="btn-signIn" th:href="@{/login}">Entrar</a></li>
+            <li sec:authorize="isAuthenticated()"><a class="btn-signIn" th:href="@{/logout}">Sair</a></li>
         </ul>
     </nav>
 
@@ -102,7 +103,8 @@
         <hr>
         <div class="footer_bottom">
             <h4>ESA</h4>
-            <a class="ftr-btn-signIn" th:href="@{/}">Entrar</a>
+            <a sec:authorize="!(isAuthenticated())" class="ftr-btn-signIn" th:href="@{/login}">Entrar</a>
+            <a sec:authorize="isAuthenticated()" class="ftr-btn-signIn" th:href="@{/logout}">Sair</a>
         </div>
     </footer>
 

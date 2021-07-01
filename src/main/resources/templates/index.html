@@ -90,30 +90,79 @@
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <div class="swiper-slide">
-                    <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                    <article class="article-card">
+                        <div class="artc-img">
+                            <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                        </div>
+
+                        <div class="artc-content">
+                            <span>1 de Julho de 2021</span>
+                            <h2>Projeto 1</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
+                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
+                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
+                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
+                        </div>
+                    </article>
                 </div>
 
                 <div class="swiper-slide">
-                    <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
+                    <article class="article-card">
+                        <div class="artc-img">
+                            <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
+                        </div>
+
+                        <div class="artc-content">
+                            <span>2 de Julho de 2021</span>
+                            <h2>Projeto 2</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
+                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
+                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
+                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
+                        </div>
+                    </article>
                 </div>
 
                 <div class="swiper-slide">
-                    <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
+                    <article class="article-card">
+                        <div class="artc-img">
+                            <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
+                        </div>
+
+                        <div class="artc-content">
+                            <span>3 de Julho de 2021</span>
+                            <h2>Projeto 3</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
+                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
+                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
+                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
+                        </div>
+                    </article>
                 </div>
 
                 <div class="swiper-slide">
-                    <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
+                    <article class="article-card">
+                        <div class="artc-img">
+                            <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
+                        </div>
+
+                        <div class="artc-content">
+                            <span>4 de Julho de 2021</span>
+                            <h2>Projeto 4</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
+                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
+                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
+                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
+                        </div>
+                    </article>
                 </div>
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
 
             <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-
-            <!-- If we need scrollbar -->
-            <div class="swiper-scrollbar"></div>
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
         </div>
     </section>
 
@@ -142,12 +191,13 @@
         <hr>
         <div class="footer_bottom">
             <h4>ESA</h4>
-            <a sec:authorize="!(isAuthenticated())" class="btn-signIn" th:href="@{/login}">Entrar</a>
-            <a sec:authorize="isAuthenticated()" class="btn-signIn" th:href="@{/logout}">Sair</a>
+            <a sec:authorize="!(isAuthenticated())" class="ftr-btn-signIn" th:href="@{/login}">Entrar</a>
+            <a sec:authorize="isAuthenticated()" class="ftr-btn-signIn" th:href="@{/logout}">Sair</a>
         </div>
     </footer>
 
     <!--JS-->
     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/swiperInit.js}"></script>
 </body>
 </html>
