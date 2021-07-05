@@ -40,6 +40,9 @@ body {
     min-height: 90vh;
     background-color: var(--color-gray);
 }
+.black {
+    background-color: var(--color-black);
+}
 
 .wip-alert {
     font-size: 4rem;
@@ -565,6 +568,153 @@ header#about {
 }
 #pop_art :is(h2, p) {
     text-align: left;
+}
+
+
+
+
+/*Login/Register*/
+
+.container.white#account_form {
+    flex-direction: row;
+    justify-content: space-evenly;
+    overflow: hidden;
+}
+
+.btn-backTo {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--color-black);
+    z-index: 10;
+}
+.btn-backTo img {
+    margin-right: 1rem;
+}
+
+.blob2 {
+    position: absolute;
+    top: 0;
+    right: -10rem;
+    z-index: 0;
+}
+
+.form-img {
+    z-index: 1;
+}
+#account_form form {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 60rem;
+    height: 92rem;
+    transform: translateY(10rem);
+    background: linear-gradient(96deg, rgba(107, 146, 192, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 4rem;
+    z-index: 1;
+}
+#account_form form h2 {
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 3.4rem;
+    font-weight: 600;
+}
+
+.form-group {
+    position: relative;
+    margin: 2rem 0;
+    width: 100%;
+}
+.form-group:last-of-type {
+    margin-top: 8rem;
+}
+.form-group input {
+    padding: 1.6rem 2rem;
+    padding-top: 2rem;
+    width: inherit;
+    border: none;
+    border-radius: 1rem;
+    font-size: 2rem;
+    background-color: var(--color-gray);
+}
+.form-group input:not([type="submit"]) {
+    box-shadow: 0 0 0 2px rgba(97, 94, 219, 0.7);
+    transition: box-shadow var(--transition-speed) ease-in-out;
+}
+.form-group :is(input:not([type="submit"]):focus, input:not([type="submit"]):not(:placeholder-shown)) {
+    box-shadow: 0 0 0 4px var(--color-purple);
+}
+
+.form-group input[type="submit"] {
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-white);
+    background-color: var(--color-purple);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease-in-out;
+}
+.form-group input[type="submit"]:hover {
+    background-color: rgb(116, 115, 221);
+}
+
+.form-group .bubble {
+    position: absolute;
+    top: -2rem;
+    left: 2.5rem;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 2rem;
+    background-color: var(--color-purple);
+    transform: scaleY(0);
+    opacity: 0;
+    transition: all var(--transition-speed) ease-in-out;
+}
+.form-group:nth-of-type(2) .bubble {
+    width: 7.5rem;
+}
+
+.form-group :is(input:focus, input:not(:placeholder-shown)) ~ .bubble {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.form-group label {
+    position: absolute;
+    top: 1.6rem;
+    left: 2rem;
+    font-size: 2rem;
+    color: rgb(48, 48, 48);
+    transition: all var(--transition-speed) ease-in-out;
+}
+.form-group :is(input:focus, input:not(:placeholder-shown)) ~ label {
+    font-size: 1.7rem;
+    color: var(--color-white);
+    transform: translate(1.5rem, -3rem);
+}
+
+#account_form form span {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+}
+#account_form form span a {
+    text-decoration: none;
+    color: var(--color-purple);
+    background-image: linear-gradient(0deg, var(--color-purple) 0%, var(--color-purple) 100%);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size var(--transition-speed) ease-in-out;
+}
+#account_form form span a:is(:hover, :focus) {
+    background-size: 100% 2px;
 }
 
 
