@@ -56,26 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
         User user = userRepository.findByEmail(email);
 
         LocalDate date = LocalDate.now();
-        DateTimeFormatter  dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = date.format(dateFormat);
-        String[] array = formattedDate.split("/");
-        String monthNumber = array[1];
-        String month = switch (monthNumber) {
-            case "01" -> month = "Janeiro";
-            case "02" -> month = "Fevereiro";
-            case "03" -> month = "Março";
-            case "04" -> month = "Abril";
-            case "05" -> month = "Maio";
-            case "06" -> month = "Junho";
-            case "07" -> month = "Julho";
-            case "08" -> month = "Agosto";
-            case "09" -> month = "Setembro";
-            case "10" -> month = "Outubro";
-            case "11" -> month = "Novembro";
-            case "12" -> month = "Dezembro";
-            default -> "?";
-        };
-        formattedDate = array[0] + " de " + month + " de " + array[2];
+        String formattedDate = formatDate(date);
 
         Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
         for (File file : files){
@@ -90,6 +71,13 @@ public class ProjectServiceImpl implements ProjectService {
         User user = userRepository.findByEmail(email);
 
         LocalDate date = LocalDate.now();
+        String formattedDate = formatDate(date);
+
+        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
+        return projectRepository.save(project);
+    }
+
+    public String formatDate (LocalDate date) {
         DateTimeFormatter  dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(dateFormat);
         String[] array = formattedDate.split("/");
@@ -109,9 +97,6 @@ public class ProjectServiceImpl implements ProjectService {
             case "12" -> month = "Dezembro";
             default -> "?";
         };
-        formattedDate = array[0] + " de " + month + " de " + array[2];
-
-        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
-        return projectRepository.save(project);
+        return formattedDate = array[0] + " de " + month + " de " + array[2];
     }
 }
