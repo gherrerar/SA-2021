@@ -9,28 +9,22 @@ public class File {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
 
-    @Lob
-    private byte[] content;
-
     private String name;
 
-    @ManyToOne
+    private String path;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name="project_id", nullable=false)
     private Project project;
 
+    public File() {
+    }
 
-    public File(byte[] content, String name) {
-        this.content = content;
+    public File(String name, String path) {
         this.name = name;
+        this.path = path;
     }
 
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
-    }
 
     public String getName() {
         return name;
@@ -46,5 +40,13 @@ public class File {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
     }
 }

@@ -7,7 +7,7 @@
     <div>
       <form method="post" enctype="multipart/form-data" th:action="@{/newproject}" th:object="${project}">
         <input type="text" name="title" placeholder="Título" required>
-        <input type="file" name="files" accept="image/png, image/jpeg, image/jfif, image/gif" multiple/>
+        <input type="file" name="files" accept="image/png, image/jpeg, image/jfif, image/gif" multiple required/>
         <textarea type="text" name="text" placeholder="Texto" required></textarea>
         <button type="submit">Publicar</button>
         <a href="/">Cancelar</a>

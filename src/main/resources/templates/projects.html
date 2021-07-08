@@ -5,6 +5,7 @@
     <title>Projetos</title>
 </head>
 <body>
+<a th:href="@{/newproject}">Novo projeto</a>
 <section>
     <div class="container"  style="width: 60%; padding-bottom: 30px; margin-top: 20px;">
         <div class="card shadow-sm bg-white rounded" style="margin-top: 20px; border: 2px solid black;" th:each="project : ${projects}" >

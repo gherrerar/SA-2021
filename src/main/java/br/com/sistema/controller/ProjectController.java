@@ -2,7 +2,9 @@ package br.com.sistema.controller;
 
 import br.com.sistema.dto.ProjectDto;
 import br.com.sistema.dto.UserRegistrationDto;
+import br.com.sistema.model.File;
 import br.com.sistema.model.Project;
+import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,9 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
+    @Autowired
+    FileService fileService;
+
     @GetMapping("/projects")
     public ModelAndView getProjects () {
         ModelAndView my = new ModelAndView("projects");
@@ -38,7 +43,9 @@ public class ProjectController {
     public ModelAndView getProjectDetails (@PathVariable ("id") long id) {
         ModelAndView my = new ModelAndView("projectDetails");
         Project project = projectService.findById(id);
+        List<File> files = fileService.findAllByProjectId(id);
         my.addObject("project", project);
+        my.addObject("files", files);
         return my;
     }
 
@@ -53,13 +60,8 @@ public class ProjectController {
     }
 
     @PostMapping("/newproject")
-    public String saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attributes){
-        if(files.length > 1){
-            projectService.save(projectDto, files);
-        } else {
-            projectService.save(projectDto);
-        }
-
+    public String saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files){
+        projectService.save(projectDto, files);
         return "redirect:/projects";
     }
 }

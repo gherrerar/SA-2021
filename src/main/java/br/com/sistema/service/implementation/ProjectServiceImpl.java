@@ -6,6 +6,7 @@ import br.com.sistema.model.User;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
 import br.com.sistema.repository.UserRepository;
+import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,13 +15,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -29,6 +32,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    FileService fileService;
 
     @Override
     public List<Project> findAll() {
@@ -42,10 +48,19 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project save(ProjectDto projectDto, MultipartFile[] mpFiles) {
+        Path currentPath = Paths.get(".");
+        Path absolutePath = currentPath.toAbsolutePath();
         ArrayList<File> files = new ArrayList<>();
         Arrays.stream(mpFiles).forEach(file -> {
+            files.add(new File(file.getOriginalFilename(), absolutePath + "/src/main/resources/static/photos/"));
             try {
-                files.add(new File(file.getBytes(), file.getOriginalFilename()));
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(absolutePath + "/src/main/resources/static/photos/" + file.getOriginalFilename());
+                try {
+                    Files.write(path, bytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,44 +74,34 @@ public class ProjectServiceImpl implements ProjectService {
         String formattedDate = formatDate(date);
 
         Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
+
         for (File file : files){
             file.setProject(project);
+            fileService.save(file);
         }
-        return projectRepository.save(project);
-    }
-
-    public Project save(ProjectDto projectDto) {
-        Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email = ((UserDetails)loggedUser).getUsername();
-        User user = userRepository.findByEmail(email);
-
-        LocalDate date = LocalDate.now();
-        String formattedDate = formatDate(date);
-
-        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
         return projectRepository.save(project);
     }
 
     public String formatDate (LocalDate date) {
         DateTimeFormatter  dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(dateFormat);
-        String[] array = formattedDate.split("/");
-        String monthNumber = array[1];
+        String[] slicedDate = formattedDate.split("/");
+        String monthNumber = slicedDate[1];
         String month = switch (monthNumber) {
-            case "01" -> month = "Janeiro";
-            case "02" -> month = "Fevereiro";
-            case "03" -> month = "Março";
-            case "04" -> month = "Abril";
-            case "05" -> month = "Maio";
-            case "06" -> month = "Junho";
-            case "07" -> month = "Julho";
-            case "08" -> month = "Agosto";
-            case "09" -> month = "Setembro";
-            case "10" -> month = "Outubro";
-            case "11" -> month = "Novembro";
-            case "12" -> month = "Dezembro";
+            case "01" -> "Janeiro";
+            case "02" -> "Fevereiro";
+            case "03" -> "Março";
+            case "04" -> "Abril";
+            case "05" -> "Maio";
+            case "06" -> "Junho";
+            case "07" -> "Julho";
+            case "08" -> "Agosto";
+            case "09" -> "Setembro";
+            case "10" -> "Outubro";
+            case "11" -> "Novembro";
+            case "12" -> "Dezembro";
             default -> "?";
         };
-        return formattedDate = array[0] + " de " + month + " de " + array[2];
+        return slicedDate[0] + " de " + month + " de " + slicedDate[2];
     }
 }
