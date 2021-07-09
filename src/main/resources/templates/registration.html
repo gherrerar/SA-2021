@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
@@ -32,18 +34,16 @@
         </a>
         <img class="form-img" th:src="@{/img/account_svg.svg}" alt="Duas mulheres avaliando informações pessoais.">
 
-        <form th:action="@{/registration}" method="post" th:object="${user}">
+        <form th:action="@{/registration}" method="post" id="form-registration">
             <h2>Cadastro</h2>
-            <!-- Mensagem de erro ou sucesso -->
-            <th:block th:include="mensagemRegistro"></th:block>
 
             <div class="form-group">
-                <input type="email" id="email" name="email" th:value="${email}" placeholder=" " autofocus required>
+                <input type="email" id="email" name="email" placeholder=" " autofocus required>
                 <div class="bubble"></div>
                 <label for="email">Email</label>
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" th:value="${password}" placeholder=" " required>
+                <input type="password" id="password" name="password" placeholder=" " required>
                 <div class="bubble"></div>
                 <label for="password">Senha</label>
             </div>
@@ -57,5 +57,9 @@
 
     <!--JS-->
     <script th:src="@{/js/script.js}"></script>
+
+    <script th:src="@{/sweetalert2/sweetalert2@11.js}"></script>
+    <script type="text/javascript" th:src="@{/js/registration.js}"></script>
+
 </body>
 </html>

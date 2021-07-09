@@ -1,7 +1,6 @@
 package br.com.sistema.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ProjectDto {
     private String title;

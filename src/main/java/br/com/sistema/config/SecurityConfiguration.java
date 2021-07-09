@@ -55,12 +55,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/img/**",
                 "/fotorama-4.6.4/**",
                 "/swiper-6.7.1/**",
-                "/fontawesome-5.15.3/**").permitAll()
+                "/fontawesome-5.15.3/**",
+                "/sweetalert2/**",
+                "/photos/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login?error=true")
+                .failureUrl("/login#error")
                 .permitAll()
                 .and()
                 .logout()

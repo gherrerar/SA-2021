@@ -1,20 +1,21 @@
 package br.com.sistema.controller;
 
-import br.com.sistema.dto.ProjectDto;
-import br.com.sistema.dto.UserRegistrationDto;
+import br.com.sistema.dto.ProjectDto;;
 import br.com.sistema.model.File;
 import br.com.sistema.model.Project;
 import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
@@ -60,8 +61,13 @@ public class ProjectController {
     }
 
     @PostMapping("/newproject")
-    public String saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files){
-        projectService.save(projectDto, files);
-        return "redirect:/projects";
+    public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+        try {
+            projectService.save(projectDto, files);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
+        }
+        return ResponseEntity.ok("Projeto cadastrado com êxito");
     }
 }

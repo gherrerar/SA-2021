@@ -53,16 +53,18 @@ public class ProjectServiceImpl implements ProjectService {
         ArrayList<File> files = new ArrayList<>();
         Arrays.stream(mpFiles).forEach(file -> {
             files.add(new File(file.getOriginalFilename(), absolutePath + "/src/main/resources/static/photos/"));
-            try {
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(absolutePath + "/src/main/resources/static/photos/" + file.getOriginalFilename());
+            if (file.getSize() < 20000000) {
                 try {
-                    Files.write(path, bytes);
+                    byte[] bytes = file.getBytes();
+                    Path path = Paths.get(absolutePath + "/src/main/resources/static/photos/" + file.getOriginalFilename());
+                    try {
+                        Files.write(path, bytes);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         });
 
@@ -73,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate);
+        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, files.get(0).getName());
 
         for (File file : files){
             file.setProject(project);

@@ -28,6 +28,8 @@ public class Project {
 
     public String formattedDate;
 
+    private String mainFileName;
+
     @NotBlank
     @Lob
     private String text;
@@ -35,12 +37,13 @@ public class Project {
     public Project() {
     }
 
-    public Project(String title, User user, LocalDate date, String text, String formattedDate) {
+    public Project(String title, User user, LocalDate date, String text, String formattedDate, String mainFileName) {
         this.title = title;
         this.user = user;
         this.date = date;
         this.text = text;
         this.formattedDate = formattedDate;
+        this.mainFileName = mainFileName;
     }
 
     public String getTitle() {
@@ -83,5 +86,13 @@ public class Project {
 
     public void setFormattedDate(String formattedDate) {
         this.formattedDate = formattedDate;
+    }
+
+    public String getMainFileName() {
+        return mainFileName;
+    }
+
+    public void setMainFileName(String mainFileName) {
+        this.mainFileName = mainFileName;
     }
 }

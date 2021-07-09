@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Projetos</title>
+
 </head>
 <body>
 <a th:href="@{/newproject}">Novo projeto</a>
@@ -12,10 +13,9 @@
             <div class="card-body">
                 <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
                     <span th:text="${project.getUserName}"></span>
-
                     <span th:text="${project.getFormattedDate}"></span>
-
                 </p>
+                <img th:src="@{${'/photos/' + project.getMainFileName()}}" style="width: 150px;">
                 <a th:href="@{'/projects/' + ${project.id}}"><h4 style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${project.title}"></span></h4></a>
                 <p><span th:utext="${#strings.abbreviate(project.text,400)} "></span></p>
                 <a th:href="@{'/projects/' + ${project.id}}">Acessar</a>
