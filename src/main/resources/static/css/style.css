@@ -542,7 +542,7 @@ header#about {
 .container.white:is(#arte_urbana, #pop_art) {
     padding: 16rem;
     flex-direction: row;
-    height: 80vh;
+    min-height: 80vh;
 }
 
 .movement-desc h2 {
@@ -568,6 +568,123 @@ header#about {
 }
 #pop_art :is(h2, p) {
     text-align: left;
+}
+
+
+/*About - Equipe*/
+
+.container.black {
+    padding: 4rem 0;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.members-cards {
+    padding: 0 4rem;
+    width: 100%;
+    z-index: 0;
+}
+.members-cards::after {
+    content: 'Equipe.';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 30rem;
+    font-weight: 900;
+    color: rgb(255, 255, 255, 0.2);
+    z-index: -1;
+}
+
+.members-cards:hover .card > .card-image img {
+    filter: grayscale(100%) brightness(70%);
+}
+.members-cards:hover .card:hover > .card-image img {
+    filter: none;
+}
+
+
+.card {
+    position: relative;
+    margin: 8rem auto 0 auto;
+    padding: 6rem;
+    padding-left: 16rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 63rem;
+    height: 30rem;
+    background-color: rgba(241, 241, 250, 0.123);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0px 8px 20px -10px rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+}
+
+.card-image img {
+    position: relative;
+    width: 25rem;
+    border-radius: 50%;
+    transition: filter var(--transition-speed) ease-in-out;
+}
+.img-gradient {
+    position: absolute;
+    margin: auto;
+    width: 26.5rem;
+    height: 26.5rem;
+    border-radius: 50%;
+    background: linear-gradient(342deg, rgb(175, 142, 245) 0%, var(--color-green) 100%);;
+    box-shadow: 0px 0px 0px 6px rgb(72, 72, 82)
+}
+.card-image {
+    position: absolute;
+    left: -12.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-content {
+    text-align: center;
+    overflow: hidden;
+}
+
+.member-name {
+    font-size: 4.5rem;
+    font-weight: 600;
+    color: var(--color-white);
+}
+.desc {
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-green);
+}
+
+.social-icons {
+    margin: 4rem auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+.fa-envelope,
+.fa-linkedin {
+    margin-left: 3rem;
+}
+.fa-github,
+.fa-envelope,
+.fa-linkedin {
+    font-size: 3.5rem;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: color var(--transition-speed) ease-in-out;
+}
+:is(.fa-github, .fa-envelope, .fa-linkedin):hover {
+    color: var(--color-green);
 }
 
 
@@ -935,12 +1052,12 @@ header#about {
         padding: 0 16rem;
     }
     .container.white#arte_urbana {
-        padding-bottom: 10rem;
+        margin-bottom: 10rem;
         flex-wrap: wrap-reverse;
     }
     .container.white#pop_art {
         padding-top: 10rem;
-        padding-bottom: 20rem;
+        margin-bottom: 20rem;
         flex-wrap: wrap;
     }
 
@@ -1088,11 +1205,25 @@ header#about {
     }
 }
 
+@media screen and (max-width: 1180px){
+
+    .members-cards::after {
+        font-size: 26rem;
+    }
+}
+
 @media screen and (max-width: 1140px){
 
     #home h1::before {
         width: 45rem;
         font-size: 7.5rem;
+    }
+}
+
+@media screen and (max-width: 1142px){
+
+    .movement-desc p {
+        font-size: 2.2rem;
     }
 }
 
@@ -1137,6 +1268,13 @@ header#about {
 
     .artc-content h2 {
         font-size: 4.5rem;
+    }
+}
+
+@media screen and (max-width: 1018px){
+
+    .members-cards::after {
+        font-size: 22rem;
     }
 }
 
@@ -1188,10 +1326,52 @@ header#about {
     }
 }
 
+@media screen and (max-width: 986px){
+
+    .container.white#pop_art {
+        padding-bottom: ;
+    }
+}
+
 @media screen and (max-width: 951px){
 
     .ftr-contact {
         margin-bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 926px) {
+    .member-name {
+        font-size: 3.5rem;
+    }
+    .desc {
+        font-size: 1.8rem;
+    }
+
+    .fa-envelope,
+    .fa-linkedin {
+        margin-left: 2rem;
+    }
+
+    .card {
+        width: 54rem;
+    }
+}
+
+@media screen and (max-width: 902px){
+
+    #about h1 {
+        font-size: 3.6rem;
+    }
+    #about p {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 876px){
+
+    .members-cards::after {
+        font-size: 18rem;
     }
 }
 
@@ -1240,6 +1420,39 @@ header#about {
     }
 }
 
+@media screen and (max-width: 838px) {
+    
+    .member-name {
+        font-size: 3rem;
+    }
+    .desc {
+        font-size: 1.5rem;
+    }
+
+    .fa-github,
+    .fa-envelope,
+    .fa-linkedin {
+        font-size: 2.6rem;
+    }
+
+    .card {
+        padding-left: 12rem;
+        width: 50rem;
+        height: 26rem;
+    }
+
+    .card-image {
+        left: -10rem;
+    }
+    .card-image img {
+        width: 20rem;
+    }
+    .img-gradient {
+        width: 21.5rem;
+        height: 21.5rem;
+    }
+}
+
 @media screen and (max-width: 794px){
 
     header#home {
@@ -1267,10 +1480,59 @@ header#about {
     }
 }
 
+@media screen and (max-width: 736px) {
+
+    .card {
+        margin-top: 16rem;
+        padding: 6rem;
+        padding-top: 12rem;
+        flex-direction: column;
+        width: 40rem;
+        height: 32rem;
+    }
+
+    .card-image {
+        top: -10rem;
+        left: auto;
+    }
+}
+
 @media screen and (max-width: 718px){
 
     .blob1 {
         right: -48rem;
+    }
+
+    .members-cards::after {
+        font-size: 14rem;
+    }
+}
+
+@media screen and (max-width: 706px){
+
+    .about-desc {
+        margin: 20rem 5rem 0 5rem;
+    }
+    #about h1 {
+        font-size: 3.2rem;
+    }
+    #about p {
+        font-size: 2.2rem;
+    }
+
+    .container.white:is(#arte_urbana, #pop_art) {
+        padding: 0 10rem;
+    }
+
+    .movement-desc h2 {
+        font-size: 3rem;
+    }
+    .movement-desc p {
+        font-size: 2rem;
+    }
+    
+    .movement-img {
+        width: 22rem;
     }
 }
 
@@ -1357,6 +1619,64 @@ header#about {
     }
 }
 
+@media screen and (max-width: 558px){
+
+    .members-cards::after {
+        font-size: 12rem;
+    }
+}
+
+@media screen and (max-width: 540px){
+
+    .about-desc {
+        margin: 10rem 5rem 0 5rem;
+    }
+    #about h1 {
+        font-size: 2.8rem;
+    }
+    #about p {
+        font-size: 1.8rem;
+    }
+
+    .movement-desc h2 {
+        font-size: 2.6rem;
+    }
+    .movement-desc p {
+        font-size: 1.6rem;
+    }
+    
+    .movement-img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    
+    .card {
+        padding: 4rem;
+        padding-top: 10rem;
+        width: 100%;
+        height: 30.5rem;
+    }
+
+    .card-image {
+        top: -7.5rem;
+    }
+    .card-image img {
+        width: 15rem;
+    }
+    .img-gradient {
+        width: 16.5rem;
+        height: 16.5rem;
+    }
+
+
+
+    .members-cards::after {
+        font-size: 10rem;
+    }
+}
+
 @media screen and (max-width: 466px){
 
     .ftr-contact h3 {
@@ -1381,6 +1701,23 @@ header#about {
 
     .artc-content p {
         width: 30rem;
+    }
+}
+
+@media screen and (max-width: 444px){
+
+    #about h1 {
+        font-size: 2.4rem;
+    }
+    #about p {
+        font-size: 1.6rem;
+    }
+
+    .movement-desc h2 {
+        font-size: 2.2rem;
+    }
+    .movement-desc p {
+        font-size: 1.4rem;
     }
 }
 
@@ -1414,6 +1751,13 @@ header#about {
     }
 }
 
+@media screen and (max-width: 400px){
+
+    .members-cards::after {
+        font-size: 8rem;
+    }
+}
+
 @media screen and (max-width: 394px){
     
     .ftr-contact h3 {
@@ -1421,6 +1765,27 @@ header#about {
     }
     .ftr-item:nth-child(2) {
         margin-left: 4rem;
+    }
+}
+
+@media screen and (max-width: 444px){
+
+    .container.white:is(#arte_urbana, #pop_art) {
+        padding: 0 6rem;
+    }
+
+    .about-desc {
+        margin: 10rem 2rem 0 2rem;
+    }
+    #about h1 {
+        font-size: 2.2rem;
+    }
+
+    .movement-desc h2 {
+        font-size: 2.2rem;
+    }
+    .movement-desc p {
+        font-size: 1.4rem;
     }
 }
 
@@ -1458,5 +1823,36 @@ header#about {
     }
     .ftr-item:first-of-type {
         margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 324px){
+
+    .members-cards::after {
+        font-size: 6.5rem;
+    }
+}
+
+@media screen and (max-width: 272px) {
+    .member-name {
+        font-size: 2.7rem;
+    }
+    .desc {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        padding-top: 4rem;
+    }
+
+    .card-image {
+        top: -5rem;
+    }
+    .card-image img {
+        width: 10rem;
+    }
+    .img-gradient {
+        width: 11.5rem;
+        height: 11.5rem;
     }
 }

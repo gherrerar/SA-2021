@@ -77,7 +77,83 @@
         <img class="movement-img" th:src="@{/img/pop_art.svg}" alt="HQ, legado da Pop Art">
     </section>
 
+    <div class="wave-container">
+        <svg width="1920" height="239" viewBox="0 0 1920 239" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 143L53.3333 132.3C106.667 122 213.333 100 320 73.7C426.667 47 533.333 15 640 4.30003C746.667 -5.99997 853.333 4.00003 960 31C1066.67 58 1173.33 100 1280 132.3C1386.67 164 1493.33 186 1600 175C1706.67 164 1813.33 122 1866.67 100.3L1920 79V239H1866.67C1813.33 239 1706.67 239 1600 239C1493.33 239 1386.67 239 1280 239C1173.33 239 1066.67 239 960 239C853.333 239 746.667 239 640 239C533.333 239 426.667 239 320 239C213.333 239 106.667 239 53.3333 239H0V143Z" fill="#262626"/>
+        </svg>
+    </div>
+    <section class="container black" id="equipe">
+        <div class="members-cards">
 
+            <div class="card">
+                <div class="card-image">
+                    <div class="img-gradient"></div>
+                    <img src="img/Alice.jpeg">
+                </div>
+                
+                <div class="card-content">
+                    <h3 class="member-name">Alice Bredow</h3>
+                    <span class="desc">Desenvolvedora</span>
+                    <div class="social-icons">
+                        <i class="fab fa-github"></i>
+                        <i class="fas fa-envelope"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <div class="img-gradient"></div>
+                    <img src="img/Gabriel.jpeg">
+                </div>
+                
+                <div class="card-content">
+                    <h3 class="member-name">Gabriel Herrera</h3>
+                    <span class="desc">Desenvolvedor</span>
+                    <div class="social-icons">
+                        <i class="fab fa-github"></i>
+                        <i class="fas fa-envelope"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <div class="img-gradient"></div>
+                    <img src="img/Jean.jpeg">
+                </div>
+                
+                <div class="card-content">
+                    <h3 class="member-name">Jean Molino</h3>
+                    <span class="desc">Desenvolvedor</span>
+                    <div class="social-icons">
+                        <i class="fab fa-github"></i>
+                        <i class="fas fa-envelope"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <div class="img-gradient"></div>
+                    <img src="img/João.jpeg">
+                </div>
+                
+                <div class="card-content">
+                    <h3 class="member-name">João Pedro</h3>
+                    <span class="desc">Desenvolvedor</span>
+                    <div class="social-icons">
+                        <i class="fab fa-github"></i>
+                        <i class="fas fa-envelope"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="footer_top">
@@ -97,7 +173,7 @@
                     <p class="ftr-link">Sobre</p>
                     <a class="ftr-sublink" th:href="@{/sobre/#arte_urbana}">Arte Urbana</a>
                     <a class="ftr-sublink" th:href="@{/sobre/#pop_art}">Pop Art</a>
-                    <a class="ftr-sublink" th:href="@{/sobre/#}">Equipe</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#equipe}">Equipe</a>
                 </li>
             </ul>
         </div>
