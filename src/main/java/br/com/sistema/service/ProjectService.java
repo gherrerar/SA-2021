@@ -11,5 +11,5 @@ import java.util.List;
 public interface ProjectService {
     List<Project> findAll();
     Project findById(long id);
-    Project save(ProjectDto project, MultipartFile[] files);
+    Boolean save(ProjectDto project, MultipartFile[] files);
 }

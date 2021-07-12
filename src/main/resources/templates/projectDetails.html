@@ -7,14 +7,14 @@
 <article>
   <p>
     <span th:text="${project.getUserName}"></span>
-    <span th:text="${project.getTitle}"></span>
+
     <span th:text="${project.getFormattedDate}"></span>
   </p>
-
+  <h1 th:text="${project.getTitle}"></h1>
   <p><span th:utext="${#strings.abbreviate(project.text,400)} "></span></p>
 
-  <div th:each="file : ${files}">
-    <img th:src="@{${'/photos/' + file.name}}">
+  <div th:each="image : ${images}">
+    <img th:src="@{${'/upload/images/' + image.name}}">
   </div>
 </article>
 </body>

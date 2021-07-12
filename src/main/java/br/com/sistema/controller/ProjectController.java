@@ -1,7 +1,7 @@
 package br.com.sistema.controller;
 
 import br.com.sistema.dto.ProjectDto;;
-import br.com.sistema.model.File;
+import br.com.sistema.model.Image;
 import br.com.sistema.model.Project;
 import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
@@ -14,15 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import javax.validation.Valid;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Collections;
 
 @Controller
 public class ProjectController {
@@ -44,9 +36,9 @@ public class ProjectController {
     public ModelAndView getProjectDetails (@PathVariable ("id") long id) {
         ModelAndView my = new ModelAndView("projectDetails");
         Project project = projectService.findById(id);
-        List<File> files = fileService.findAllByProjectId(id);
+        List<Image> images = fileService.findAllByProjectId(id);
         my.addObject("project", project);
-        my.addObject("files", files);
+        my.addObject("images", images);
         return my;
     }
 
@@ -62,12 +54,11 @@ public class ProjectController {
 
     @PostMapping("/newproject")
     public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
-        try {
-            projectService.save(projectDto, files);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
+        if (projectService.save(projectDto, files)){
+            return ResponseEntity.ok("Projeto cadastrado com êxito");
         }
-        return ResponseEntity.ok("Projeto cadastrado com êxito");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
     }
+
+    //TODO delete e edit
 }

@@ -3,8 +3,8 @@ package br.com.sistema.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "file")
-public class File {
+@Table(name = "image")
+public class Image {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     public Long id;
@@ -17,10 +17,10 @@ public class File {
     @JoinColumn(name="project_id", nullable=false)
     private Project project;
 
-    public File() {
+    public Image() {
     }
 
-    public File(String name, String path) {
+    public Image(String name, String path) {
         this.name = name;
         this.path = path;
     }

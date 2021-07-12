@@ -27,6 +27,7 @@ function fire_ajax_submit(formData) {
     timeout: 600000,
     complete: function (e, xhr) {
       if (e.status == '200') {
+//        TODO limpar os campos.
         var Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -41,7 +42,7 @@ function fire_ajax_submit(formData) {
 
         Toast.fire({
           icon: 'success',
-          title: xhr.responseText
+          title: e.responseText
         })
       } else {
         var Toast = Swal.mixin({
@@ -58,7 +59,7 @@ function fire_ajax_submit(formData) {
 
         Toast.fire({
           icon: 'error',
-          title: xhr.responseText
+          title: e.responseText
         })
       }
     },

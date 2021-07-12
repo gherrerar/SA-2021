@@ -28,6 +28,7 @@ function fire_ajax_submit(formData) {
     timeout: 600000,
     complete: function (e, xhr) {
       if (e.status == '200') {
+      //        TODO limpar os campos.
         var Toast = Swal.mixin({
           toast: true,
           position: 'top-end',

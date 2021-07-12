@@ -1,7 +1,7 @@
 package br.com.sistema.service.implementation;
 
 import br.com.sistema.dto.ProjectDto;
-import br.com.sistema.model.File;
+import br.com.sistema.model.Image;
 import br.com.sistema.model.User;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
@@ -14,15 +14,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -47,41 +50,28 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project save(ProjectDto projectDto, MultipartFile[] mpFiles) {
-        Path currentPath = Paths.get(".");
-        Path absolutePath = currentPath.toAbsolutePath();
-        ArrayList<File> files = new ArrayList<>();
-        Arrays.stream(mpFiles).forEach(file -> {
-            files.add(new File(file.getOriginalFilename(), absolutePath + "/src/main/resources/static/photos/"));
-            if (file.getSize() < 20000000) {
-                try {
-                    byte[] bytes = file.getBytes();
-                    Path path = Paths.get(absolutePath + "/src/main/resources/static/photos/" + file.getOriginalFilename());
-                    try {
-                        Files.write(path, bytes);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email = ((UserDetails)loggedUser).getUsername();
-        User user = userRepository.findByEmail(email);
-
+    public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
+        ArrayList<Image> images = processImages(mpFiles);
+        User user = findLoggedUser();
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, files.get(0).getName());
+        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
-        for (File file : files){
-            file.setProject(project);
-            fileService.save(file);
+        for (Image image : images){
+            image.setProject(project);
+            fileService.save(image);
         }
-        return projectRepository.save(project);
+
+        projectRepository.save(project);
+
+        return true;
+    }
+
+    public User findLoggedUser () {
+        Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = ((UserDetails)loggedUser).getUsername();
+        return userRepository.findByEmail(email);
     }
 
     public String formatDate (LocalDate date) {
@@ -105,5 +95,28 @@ public class ProjectServiceImpl implements ProjectService {
             default -> "?";
         };
         return slicedDate[0] + " de " + month + " de " + slicedDate[2];
+    }
+
+    public ArrayList<Image> processImages (MultipartFile[] mpFiles) {
+        Path currentPath = Paths.get(".");
+        Path absolutePath = currentPath.toAbsolutePath();
+        String path = absolutePath + "/src/main/upload/images/";
+        ArrayList<Image> images = new ArrayList<>();
+        Arrays.stream(mpFiles).forEach(file -> {
+            String filename = file.getOriginalFilename();
+            String suffixLast = filename.substring(filename.lastIndexOf("."));
+            UUID uuid = UUID.randomUUID();
+            String newFileName = uuid+suffixLast;
+            images.add(new Image(newFileName, path));
+            if (file.getSize() < 20000000) {
+                try {
+                    Path dest = Paths.get( path + File.separator + newFileName);
+                    Files.copy(file.getInputStream(), dest, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return images;
     }
 }
