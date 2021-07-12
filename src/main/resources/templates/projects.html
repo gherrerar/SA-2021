@@ -1,29 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>Projetos</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
+    <!--jQuery-->
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    
+    <!--Fotorama-->
+    <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
+    <script th:src="@{/fotorama-4.6.4/fotorama.js}"></script>
+
+    <!--Swiper-->
+    <link rel="stylesheet" th:href="@{/swiper-6.7.1/swiper-bundle.min.css}">
+    <script th:src="@{/swiper-6.7.1/swiper-bundle.min.js}"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>ESA | Projetos</title>
 </head>
+
 <body>
-<a th:href="@{/newproject}">Novo projeto</a>
-<section>
-    <div class="container"  style="width: 60%; padding-bottom: 30px; margin-top: 20px;">
-        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px; border: 2px solid black;" th:each="project : ${projects}" >
-            <div class="card-body">
-                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
-                    <span th:text="${project.getUserName}"></span>
-                    <span th:text="${project.getFormattedDate}"></span>
-                </p>
-                <img th:src="@{${'/upload/images/' + project.getMainFileName()}}" style="width: 150px;">
-
-                <a th:href="@{'/projects/' + ${project.id}}"><h4 style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${project.title}"></span></h4></a>
-                <p><span th:utext="${#strings.abbreviate(project.text,400)} "></span></p>
-                <a th:href="@{'/projects/' + ${project.id}}">Acessar</a>
-            </div>
+    <nav class="navbar">
+        <div class="navbar-toggle">
+            <svg class="hamburger hamRotate" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('opened')">
+                <path class="line top" d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"></path>
+                <path class="line middle" d="m 70,50 h -40"></path>
+                <path class="line bottom" d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"></path>
+            </svg>
         </div>
-    </div>
-</section>
+        <a class="logo" th:href="@{/}">Logo</a>
+        <ul class="main-nav">
+            <li><a class="nav-link" th:href="@{/}">Início</a></li>
+            <li><a class="nav-link" th:href="@{/sobre}">Sobre</a></li>
+            <li><a class="nav-link selected" th:href="@{/projects}">Projetos</a></li>
+            <li sec:authorize="!(isAuthenticated())"><a class="btn-signIn" th:href="@{/login}">Entrar</a></li>
+            <li sec:authorize="isAuthenticated()"><a class="btn-signIn" th:href="@{/logout}">Sair</a></li>
+        </ul>
+    </nav>
 
+    <div class="wave-container">
+        <svg width="1920" height="307" viewBox="0 0 1920 307" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 126L53.3333 120.004C106.667 113.556 213.333 102.244 320 77.6956C426.667 53.6 533.333 17.4 640 5.29559C746.667 -6.35626 853.333 4.95624 960 47.6044C1066.67 89.8 1173.33 162.2 1280 174.304C1386.67 185.956 1493.33 138.444 1600 138.104C1706.67 138.444 1813.33 185.956 1866.67 210.504L1920 234.6V307H1866.67C1813.33 307 1706.67 307 1600 307C1493.33 307 1386.67 307 1280 307C1173.33 307 1066.67 307 960 307C853.333 307 746.667 307 640 307C533.333 307 426.667 307 320 307C213.333 307 106.667 307 53.3333 307H0L0 126Z" fill="#5EDB8C"/>
+        </svg>
+    </div>
+    <header id="projects">
+        <div class="projects-desc">
+            <h1>Projetos</h1>
+            <p>Semana de Arte</p>
+        </div>
+    </header>
+    <div class="wave-container">
+        <svg width="1920" height="338" viewBox="0 0 1920 338" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 127.8L53.3333 106.5C106.667 85.2002 213.333 42.6002 320 78.1446C426.667 113.156 533.333 227.644 640 262.656C746.667 298.2 853.333 255.6 960 269.845C1066.67 283.556 1173.33 355.444 1280 333.745C1386.67 312.844 1493.33 198.356 1600 142.045C1706.67 85.2002 1813.33 85.2002 1866.67 85.2002H1920V0.000183105H1866.67C1813.33 0.000183105 1706.67 0.000183105 1600 0.000183105C1493.33 0.000183105 1386.67 0.000183105 1280 0.000183105C1173.33 0.000183105 1066.67 0.000183105 960 0.000183105C853.333 0.000183105 746.667 0.000183105 640 0.000183105C533.333 0.000183105 426.667 0.000183105 320 0.000183105C213.333 0.000183105 106.667 0.000183105 53.3333 0.000183105H0V127.8Z" fill="#5EDB8C"/>
+        </svg>
+    </div>
+
+    <section class="container white" id="projects_list">
+        <div class="projects-cards">
+
+            <article class="prjt-card" th:each="project : ${projects}">
+                <div class="prjt-img">
+                    <img th:src="@{${'/upload/images/' + project.getMainFileName()}}" alt="">
+                </div>
+                <h2 th:utext="${#strings.abbreviate(project.title,10)}"></h2>
+                <p th:text="${project.getUserName}"></p>
+                <i class="fas fa-arrow-right"></i>
+                <a class="btn-prjt" th:href="@{'/projects/' + ${project.id}}"></a>
+            </article>
+        </div>
+        <a class="btn-newprjt" th:href="@{/newproject}">
+            <i class="fas fa-plus-circle"></i>
+            <span>Novo Projeto</span>
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer_top">
+            <div class="ftr-contact">
+                <h3>Entre em contato conosco</h3>
+                <div class="icons">
+
+                </div>
+            </div>
+            <ul class="ftr-list">
+                <li class="ftr-item">
+                    <p class="ftr-link">Início</p>
+                    <a class="ftr-sublink" th:href="@{/sobre/#}">Destaques</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#}">Artigos</a>
+                </li>
+                <li class="ftr-item">
+                    <p class="ftr-link">Sobre</p>
+                    <a class="ftr-sublink" th:href="@{/sobre/#arte_urbana}">Arte Urbana</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#pop_art}">Pop Art</a>
+                    <a class="ftr-sublink" th:href="@{/sobre/#equipe}">Equipe</a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div class="footer_bottom">
+            <h4>ESA</h4>
+            <a sec:authorize="!(isAuthenticated())" class="ftr-btn-signIn" th:href="@{/login}">Entrar</a>
+            <a sec:authorize="isAuthenticated()" class="ftr-btn-signIn" th:href="@{/logout}">Sair</a>
+        </div>
+    </footer>
+
+    <!--JS-->
+    <script th:src="@{/js/script.js}"></script>
+
+    <script th:src="@{/sweetalert2/sweetalert2@11.js}"></script>
+    <script type="text/javascript" th:src="@{/js/registration.js}"></script>
 </body>
 </html>
