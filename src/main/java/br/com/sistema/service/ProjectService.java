@@ -12,4 +12,5 @@ public interface ProjectService {
     List<Project> findAll();
     Project findById(long id);
     Boolean save(ProjectDto project, MultipartFile[] files);
+    void deleteById (Long id);
 }

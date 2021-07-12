@@ -9,4 +9,5 @@ public interface FileService {
     Image save(Image image);
     List<Image> findAll();
     List<Image> findAllByProjectId (long projectId);
+    Boolean deleteAllById(long id);
 }

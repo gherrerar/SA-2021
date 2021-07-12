@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  console.log("alo")
   $("#form-registration").submit(function (event) {
     event.preventDefault();
     var form = document.getElementById("form-registration");

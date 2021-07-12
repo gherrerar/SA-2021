@@ -28,7 +28,7 @@ public class UserRegistrationController {
                 userService.save(registrationDto);
             } catch (Exception e){
                 e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o usuário!");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar o usuário!");
             }
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email já cadastrado no sistema!");

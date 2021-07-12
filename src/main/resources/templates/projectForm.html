@@ -4,14 +4,11 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>Projetos</title>
-
-    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
-
 </head>
 <body>
     <div>
       <form method="post" enctype="multipart/form-data" th:action="@{/newproject}" id="form-project">
-        <input type="text" name="title" placeholder="Título" required>
+        <input type="text" name="title"  placeholder="Título" required>
         <input type="file" name="files" accept="image/png, image/jpeg, image/jfif, image/gif" multiple required/>
         <textarea type="text" name="text" placeholder="Texto" required></textarea>
         <button type="submit">Publicar</button>
@@ -19,6 +16,7 @@
       </form>
     </div>
 
+        <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
         <script th:src="@{/sweetalert2/sweetalert2@11.js}"></script>
         <script type="text/javascript" th:src="@{/js/projectForm.js}"></script>
 </body>

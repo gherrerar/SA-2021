@@ -50,6 +50,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void deleteById (Long id) { projectRepository.deleteById(id); }
+
+    @Override
     public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
         ArrayList<Image> images = processImages(mpFiles);
         User user = findLoggedUser();

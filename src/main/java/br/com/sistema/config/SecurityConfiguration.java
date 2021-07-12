@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/sobre", "/sobre/", "/#**").permitAll()
-                .antMatchers("/delete").hasAnyAuthority("ADMIN")
+//                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers(
                 "/registration**",
                 "/js/**",
