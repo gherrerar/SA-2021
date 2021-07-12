@@ -81,6 +81,7 @@ public class ProjectController {
         if (project != null) {
             if (username.equals(project.getUserName())) {
                 if(fileService.deleteAllById(id)) {
+                    projectService.deleteById(id);
                     return ResponseEntity.ok("Projeto deletado com êxito");
                 } else {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");

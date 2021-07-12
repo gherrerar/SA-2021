@@ -22,10 +22,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -65,7 +62,8 @@ public class ProjectServiceImpl implements ProjectService {
             image.setProject(project);
             fileService.save(image);
         }
-
+        Set<Image> set = new HashSet<>(images);
+        project.setImages(set);
         projectRepository.save(project);
 
         return true;

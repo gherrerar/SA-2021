@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="project")
@@ -34,6 +36,9 @@ public class Project {
     @Lob
     private String text;
 
+    @OneToMany(mappedBy="project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Image> images = new HashSet<>();
+
     public Project() {
     }
 
@@ -44,6 +49,14 @@ public class Project {
         this.text = text;
         this.formattedDate = formattedDate;
         this.mainFileName = mainFileName;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
 
     public String getTitle() {

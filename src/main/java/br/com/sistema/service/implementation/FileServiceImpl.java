@@ -34,10 +34,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public Boolean deleteAllById(long projectId) {
         List<Image> images = this.findAllByProjectId(projectId);
-        System.out.println(images.get(0));
         images.forEach(image -> {
                 try {
-                    fileRepository.deleteById(image.id);
                     Files.deleteIfExists(Paths.get("src/main/upload/images/" + image.getName()));
                 } catch (IOException e) {
                     e.printStackTrace();

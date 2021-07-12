@@ -7,9 +7,6 @@
     <meta name="HandheldFriendly" content="true">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
-
-    <!--jQuery-->
-    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     
     <!--Fotorama-->
     <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
@@ -114,7 +111,8 @@
     <!--JS-->
     <script th:src="@{/js/script.js}"></script>
 
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/sweetalert2/sweetalert2@11.js}"></script>
-    <script type="text/javascript" th:src="@{/js/registration.js}"></script>
+    <script type="text/javascript" th:src="@{/js/projects.js}"></script>
 </body>
 </html>

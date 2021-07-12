@@ -13,8 +13,8 @@ public class Image {
 
     private String path;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="project_id", nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="project_id", nullable = false)
     private Project project;
 
     public Image() {
