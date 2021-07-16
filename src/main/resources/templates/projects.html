@@ -7,6 +7,17 @@
     <meta name="HandheldFriendly" content="true">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <link rel="mask-icon" th:href="@{/favicon/safari-pinned-tab.svg}" color="#615edb">
+    <link rel="shortcut icon" th:href="@{/favicon/favicon.ico}">
+    <meta name="msapplication-TileColor" content="#615edb">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#615edb">
     
     <!--Fotorama-->
     <link rel="stylesheet" th:href="@{/fotorama-4.6.4/fotorama.css}">
@@ -32,7 +43,9 @@
                 <path class="line bottom" d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"></path>
             </svg>
         </div>
-        <a class="logo" th:href="@{/}">Logo</a>
+        <a class="logo" th:href="@{/}">
+            <img th:src="@{/img/logo.png}" alt="Logo da ESA">
+        </a>
         <ul class="main-nav">
             <li><a class="nav-link" th:href="@{/}">Início</a></li>
             <li><a class="nav-link" th:href="@{/sobre}">Sobre</a></li>
@@ -67,7 +80,7 @@
                     <img th:src="@{${'/upload/images/' + project.getMainFileName()}}" alt="">
                 </div>
                 <h2 th:utext="${#strings.abbreviate(project.title,10)}"></h2>
-                <p th:text="${project.getUserName}"></p>
+                <p th:utext="${#strings.abbreviate(project.getUserName,14)}"></p>
                 <i class="fas fa-arrow-right"></i>
                 <a class="btn-prjt" th:href="@{'/projects/' + ${project.id}}"></a>
             </article>
@@ -89,14 +102,14 @@
             <ul class="ftr-list">
                 <li class="ftr-item">
                     <p class="ftr-link">Início</p>
-                    <a class="ftr-sublink" th:href="@{/sobre/#}">Destaques</a>
-                    <a class="ftr-sublink" th:href="@{/sobre/#}">Artigos</a>
+                    <a class="ftr-sublink" th:href="@{/projects/#}">Destaques</a>
+                    <a class="ftr-sublink" th:href="@{/projects/#}">Artigos</a>
                 </li>
                 <li class="ftr-item">
                     <p class="ftr-link">Sobre</p>
-                    <a class="ftr-sublink" th:href="@{/sobre/#arte_urbana}">Arte Urbana</a>
-                    <a class="ftr-sublink" th:href="@{/sobre/#pop_art}">Pop Art</a>
-                    <a class="ftr-sublink" th:href="@{/sobre/#equipe}">Equipe</a>
+                    <a class="ftr-sublink" th:href="@{/projects/#}">Arte Urbana</a>
+                    <a class="ftr-sublink" th:href="@{/projects/#}">Pop Art</a>
+                    <a class="ftr-sublink" th:href="@{/projects/#}">Equipe</a>
                 </li>
             </ul>
         </div>
@@ -109,6 +122,7 @@
     </footer>
 
     <!--JS-->
+    <script th:src="@{/color-thief-2.3.2/dist/color-thief.umd.js}"></script>
     <script th:src="@{/js/script.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>

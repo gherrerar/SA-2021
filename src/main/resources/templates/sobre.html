@@ -6,6 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
 
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <link rel="mask-icon" th:href="@{/favicon/safari-pinned-tab.svg}" color="#615edb">
+    <link rel="shortcut icon" th:href="@{/favicon/favicon.ico}">
+    <meta name="msapplication-TileColor" content="#615edb">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#615edb">
+
     <!--jQuery-->
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     
@@ -33,7 +44,9 @@
                 <path class="line bottom" d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"></path>
             </svg>
         </div>
-        <a class="logo" th:href="@{/}">Logo</a>
+        <a class="logo" th:href="@{/}">
+            <img th:src="@{/img/logo.png}" alt="Logo da ESA">
+        </a>
         <ul class="main-nav">
             <li><a class="nav-link" th:href="@{/}">Início</a></li>
             <li><a class="nav-link selected" th:href="@{/sobre}">Sobre</a></li>
