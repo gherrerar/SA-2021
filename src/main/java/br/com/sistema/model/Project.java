@@ -2,14 +2,14 @@ package br.com.sistema.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="project")
@@ -36,8 +36,8 @@ public class Project {
     @Lob
     private String text;
 
-    @OneToMany(mappedBy="project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Image> images = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Image> images = new ArrayList<>();
 
     public Project() {
     }
@@ -51,11 +51,11 @@ public class Project {
         this.mainFileName = mainFileName;
     }
 
-    public Set<Image> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(Set<Image> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
@@ -107,5 +107,9 @@ public class Project {
 
     public void setMainFileName(String mainFileName) {
         this.mainFileName = mainFileName;
+    }
+
+    public void clearImages() {
+        images.removeAll(images);
     }
 }

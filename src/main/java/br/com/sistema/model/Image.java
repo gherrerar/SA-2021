@@ -13,8 +13,8 @@ public class Image {
 
     private String path;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="project_id", nullable = false)
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="project_id", nullable = true)
     private Project project;
 
     public Image() {
@@ -25,6 +25,13 @@ public class Image {
         this.path = path;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     public String getName() {
         return name;
@@ -32,14 +39,6 @@ public class Image {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
     }
 
     public void setPath(String path) {

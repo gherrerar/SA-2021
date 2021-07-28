@@ -8,6 +8,7 @@ import java.util.List;
 public interface FileService {
     Image save(Image image);
     List<Image> findAll();
-    List<Image> findAllByProjectId (long projectId);
-    Boolean deleteAllById(long id);
+    List<Image> findAllByProjectId (long project_id);
+    Boolean deleteFilesInFolder(long id);
+    void deleteAllById(long id);
 }

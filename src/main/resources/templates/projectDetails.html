@@ -15,12 +15,12 @@
   <h1 th:text="${project.getTitle}"></h1>
   <p><span th:utext="${#strings.abbreviate(project.text,400)} "></span></p>
 
-  <div th:each="image : ${images}">
+  <div th:each="image : ${project.images}">
     <img th:src="@{${'/upload/images/' + image.name}}">
   </div>
 
   <div th:if="${deleteAndEditAuthorized == true}"><button th:onclick="|deleteRequest('${project.id}')|">Deletar</button></div>
-
+  <div th:if="${deleteAndEditAuthorized == true}"><a th:href="@{'/editForm/' + ${project.id} }">Editar</a></div>
 </article>
 
 <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>

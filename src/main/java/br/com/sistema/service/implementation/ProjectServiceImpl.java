@@ -36,6 +36,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     FileService fileService;
 
+    @Autowired
+    ProjectService projectService;
+
     @Override
     public List<Project> findAll() {
         return projectRepository.findAll();
@@ -47,25 +50,57 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteById (Long id) { projectRepository.deleteById(id); }
+    public void deleteById (long id) { projectRepository.deleteById(id); }
 
     @Override
     public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
         ArrayList<Image> images = processImages(mpFiles);
+
         User user = findLoggedUser();
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
         Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
+        System.out.println("aaaaa");
+        System.out.println(project.id);
+
         for (Image image : images){
             image.setProject(project);
             fileService.save(image);
         }
-        Set<Image> set = new HashSet<>(images);
+        List<Image> set = new ArrayList<>(images);
         project.setImages(set);
         projectRepository.save(project);
 
+        return true;
+    }
+
+    @Override
+    public Boolean saveEdit(ProjectDto projectDto, MultipartFile[] mpFiles, long id) {
+        fileService.deleteFilesInFolder(id);
+        fileService.deleteAllById(id);
+        Project project = projectService.findById(id);
+        System.out.println("tamanho aqui 1:");
+        System.out.println(mpFiles.length);
+        if (project != null){
+            ArrayList<Image> images = processImages(mpFiles);
+            System.out.println("tamanho aqui 2:");
+            System.out.println(images.size());
+            for (Image image : images){
+                image.setProject(project);
+                fileService.save(image);
+            }
+
+            List<Image> set = new ArrayList<>(images);
+            project.setText(projectDto.getText());
+            project.setTitle(projectDto.getTitle());
+            project.setMainFileName(images.get(0).getName());
+            project.setImages(set);
+        } else {
+            return false;
+        }
+        projectRepository.save(project);
         return true;
     }
 

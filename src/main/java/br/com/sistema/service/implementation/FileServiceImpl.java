@@ -32,8 +32,8 @@ public class FileServiceImpl implements FileService {
     public List<Image> findAllByProjectId(long projectId) { return fileRepository.findByProjectId(projectId); }
 
     @Override
-    public Boolean deleteAllById(long projectId) {
-        List<Image> images = this.findAllByProjectId(projectId);
+    public Boolean deleteFilesInFolder(long id) {
+        List<Image> images = this.findAllByProjectId(id);
         images.forEach(image -> {
                 try {
                     Files.deleteIfExists(Paths.get("src/main/upload/images/" + image.getName()));
@@ -42,6 +42,14 @@ public class FileServiceImpl implements FileService {
                 }
         });
         return true;
+    }
+
+    @Override
+    public void deleteAllById(long id) {
+        List<Image> images = this.findAllByProjectId(id);
+        images.forEach(image -> {
+            fileRepository.deleteById(image.id);
+        });
     }
 
     @Override

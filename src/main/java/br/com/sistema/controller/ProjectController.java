@@ -9,14 +9,14 @@ import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-
 import java.util.List;
 
 @Controller
@@ -40,10 +40,12 @@ public class ProjectController {
         ModelAndView my = new ModelAndView("projectDetails");
         Project project = projectService.findById(id);
         List<Image> images = fileService.findAllByProjectId(id);
+        System.out.println(images.size());
 
-        String username = getLoggedUser();
+        String username = getLoggedUsername();
+        boolean hasAdminRole = checkIfHasAdmRole();
 
-        if (username.equals(project.getUserName())) {
+        if (username.equals(project.getUserName()) || hasAdminRole) {
             my.addObject("deleteAndEditAuthorized", true);
         } else {
             my.addObject("deleteAndEditAuthorized", false);
@@ -76,11 +78,12 @@ public class ProjectController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProject (@PathVariable ("id") long id) {
-        String username = getLoggedUser();
+        String username = getLoggedUsername();
         Project project = projectService.findById(id);
+        boolean hasAdminRole = checkIfHasAdmRole();
         if (project != null) {
-            if (username.equals(project.getUserName())) {
-                if(fileService.deleteAllById(id)) {
+            if (username.equals(project.getUserName()) || hasAdminRole) {
+                if(fileService.deleteFilesInFolder(id)) {
                     projectService.deleteById(id);
                     return ResponseEntity.ok("Projeto deletado com êxito");
                 } else {
@@ -92,10 +95,27 @@ public class ProjectController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Este projeto não foi encontrado!");
         }
-
     }
 
-    private String getLoggedUser () {
+    @GetMapping(value = "/editForm/{id}")
+    public ModelAndView editForm (@PathVariable("id") long id) {
+        ModelAndView my = new ModelAndView("editForm");
+        Project project = projectService.findById(id);
+        my.addObject("project", project);
+        return my;
+    }
+
+    @PostMapping(value="/edit/{id}")
+    public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+
+        if(projectService.saveEdit(projectDto, files, id)){
+            return "redirect:/projects/" + id;
+        } else {
+            return "redirect:/projects";
+        }
+    }
+
+    private String getLoggedUsername () {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof UserDetails) {
@@ -104,5 +124,10 @@ public class ProjectController {
             username = principal.toString();
         }
         return username;
+    }
+
+    private Boolean checkIfHasAdmRole () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ADMIN"));
     }
 }
