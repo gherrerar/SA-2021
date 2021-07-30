@@ -51,6 +51,9 @@ body {
 .swal2-toast {
     font-size: 1.5rem !important;
 }
+.swal2-actions > button {
+    font-size: 1.3rem !important;
+}
 
 button {
     font-family: 'Montserrat', sans-serif;
@@ -989,6 +992,7 @@ header#projects {
     font-size: 1.6rem;
     font-weight: 400;
     writing-mode: vertical-lr;
+    cursor: default;
     z-index: 1;
 }
 
@@ -1162,18 +1166,137 @@ header#projects {
     box-shadow: 0 10px 44px -16px rgb(0, 0, 0, 0.7);
     z-index: 10;
 }
-.prjt-card.no-action h2 {
+.prjt-card h2 {
     width: 33rem;
     text-align: right;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.prjt-card.no-action p {
+.prjt-card p {
     height: 15rem;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+
+/*Projects - Details*/
+
+.container.white#project_details {
+    padding: 10rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 100vh;
+    height: auto;
+}
+.prjt-info,
+.prjt-content {
+    width: 100%;
+}
+.prjt-info :is(h1, p),
+.prjt-content p {
+    word-break: break-word;
+}
+
+.prjt-info h1 {
+    margin-bottom: 1rem;
+    font-size: 5rem;
+    font-weight: 900;
+}
+.prjt-info p {
+    margin-bottom: 0.6rem;
+    font-size: 2rem;
+    color: var(--color-green);
+}
+.prjt-info span {
+    font-size: 1.5rem;
+}
+
+.prjt-content {
+    margin-top: 5rem;
+}
+.prjt-content p {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+.img-grid {
+    margin-top: 4rem;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-rows: repeat(auto-fit, 260px);
+    grid-auto-flow: dense;
+    grid-gap: 1rem; */
+}
+.img-grid img {
+    width: 100%;
+    height: 100%;
+}
+.img-grid .grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+.grid-row > div {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 calc(50% - 20rem);
+    border-radius: 2rem;
+    background-color: rgba(134, 152, 173, 1);
+    box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.prjt-config {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+}
+.prjt-config > div {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+    box-shadow: 0 0 0 2px var(--color-green);
+    border-radius: 50%;
+    background-color: var(--color-white);
+    overflow: hidden;
+    transition: all var(--transition-speed) ease-in-out;
+}
+.prjt-config > div:hover {
+    background-color: var(--color-green);
+    box-shadow: 0 0 0 6px rgba(94, 219, 140, 0.4);
+}
+.prjt-config > div:not(:last-of-type) {
+    margin-right: 2rem;
+}
+
+.prjt-config :is(button, a) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--color-green);
+    background: none;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease-in-out;
+}
+.prjt-config > div:hover :is(button, a) {
+    color: var(--color-white);
+    animation: wheel calc(var(--transition-speed) * 1.5) forwards;
+}
+
+@keyframes wheel {
+    49% {transform: translateY(-100%);}
+    50% {transform: translateY(100%); opacity: 0;}
+    51% {opacity: 1;}
 }
 
 
@@ -1310,6 +1433,13 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 1696px){
+
+    .blob2 {
+        right: -30rem;
+    }
+}
+
 @media screen and (max-width: 1600px){
 
     #home h1::before {
@@ -1427,6 +1557,13 @@ header#projects {
     }
     #about p {
         font-size: 2.8rem;
+    }
+}
+
+@media screen and (max-width: 1328px){
+
+    .form-img {
+        width: 50rem;
     }
 }
 
@@ -1563,8 +1700,30 @@ header#projects {
 
 @media screen and (max-width: 1176px){
 
+    #projects h1 {
+        font-size: 6rem;
+    }
+    #projects p {
+        font-size: 2rem;
+    }
+
     .projects-cards {
         grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 1152px){
+
+    .blob2 {
+        right: -40rem;
+    }
+    .form-img {
+        width: 40rem;
+    }
+
+    #account_form form {
+        height: 88rem;
+        transform: translateY(16rem);
     }
 }
 
@@ -1580,6 +1739,21 @@ header#projects {
 
     .movement-desc p {
         font-size: 2.2rem;
+    }
+}
+
+@media screen and (max-width: 1052px){
+
+    #account_form form {
+        width: 50rem;
+    }
+
+    @media screen and (min-height: 1081px){
+
+        .blob2 {
+            top: -10rem;
+            transform: rotate(350deg);
+        }
     }
 }
 
@@ -1642,7 +1816,16 @@ header#projects {
             height: 100%;
         }
     }
+
+
+    .blob2 {
+        right: -50rem;
+    }
+    .form-img {
+        margin: 2rem;
+    }
 }
+
 @media screen and (max-height: 834px){
 
     .article-card {
@@ -1767,9 +1950,32 @@ header#projects {
         font-size: 2.3rem;
         width: 60rem;
     }
+
+
+    .blob2 {
+        right: -36rem;
+    }
+    .form-img {
+        display: none;
+    }
+
+    #account_form form {
+        margin: 2rem;
+    }
+
+    @media screen and (max-height: 716px){
+
+        .btn-backTo {
+            top: auto;
+            bottom: 4rem;
+        }
+        .btn-backTo span {
+            display: none;
+        }
+    }
 }
 
-@media screen and (max-width: 838px) {
+@media screen and (max-width: 838px){
     
     .member-name {
         font-size: 3rem;
@@ -1799,6 +2005,19 @@ header#projects {
     .img-gradient {
         width: 21.5rem;
         height: 21.5rem;
+    }
+}
+
+@media screen and (max-width: 824px){
+
+    #projects h1 {
+        font-size: 5rem;
+    }
+    #projects p {
+        font-size: 1.8rem;
+    }
+    #projects p::before, #projects p::after {
+        width: 6rem;
     }
 }
 
@@ -1950,6 +2169,33 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 638px){
+
+    #projects h1 {
+        margin-bottom: 1.2rem;
+        font-size: 4rem;
+    }
+    #projects p {
+        font-size: 1.3rem;
+    }
+    #projects p::before, #projects p::after {
+        width: 5rem;
+    }
+    #projects p::before {
+        left: -0.5rem;
+    }
+    #projects p::after {
+        right: -0.5rem;
+    }
+}
+
+@media screen and (max-width: 608px){
+
+    .blob2 {
+        right: -44rem;
+    }
+}
+
 @media screen and (max-width: 590px){
 
     .blob1 {
@@ -1999,6 +2245,42 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 502px){
+
+    #projects h1 {
+        font-size: 3.5rem;
+    }
+    #projects p {
+        font-size: 1.2rem;
+    }
+    #projects p::before, #projects p::after {
+        width: 4rem;
+    }
+    #projects p::before {
+        left: -0.2rem;
+    }
+    #projects p::after {
+        right: -0.2rem;
+    }
+
+    .projects-cards {
+        grid-gap: 5rem;
+    }
+    .prjt-card {
+        width: 100%;
+    }
+    .prjt-img {
+        width: calc(100% - 10rem);
+    }
+}
+
+@media screen and (max-width: 483px){
+
+    .blob2 {
+        right: -52rem;
+    }
+}
+
 @media screen and (max-width: 480px) {
     
     .card {
@@ -2026,6 +2308,25 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 472px){
+
+    .prjt-card {
+        height: 20rem;
+    }
+    .prjt-card h2 {
+        width: 28rem;
+        font-size: 5rem;
+    }
+    .prjt-card p {
+        height: 11rem;
+    }
+    .btn-prjt {
+        right: 3rem;
+        width: 4rem;
+        height: 4rem;
+    }
+}
+
 @media screen and (max-width: 466px){
 
     .ftr-contact h3 {
@@ -2050,6 +2351,13 @@ header#projects {
 
     .artc-content p {
         width: 30rem;
+    }
+}
+
+@media screen and (max-width: 446px){
+
+    .prjt-card h2 {
+        width: 22rem;
     }
 }
 
@@ -2098,12 +2406,27 @@ header#projects {
             margin-top: 44rem;
         }
     }
+
+
+    @media screen and (max-height: 585px){
+
+        .btn-backTo {
+            bottom: 2rem;
+        }
+    }
 }
 
 @media screen and (max-width: 400px){
 
     .members-cards::after {
         font-size: 8rem;
+    }
+}
+
+@media screen and (max-width: 398px){
+
+    .blob2 {
+        right: -60rem;
     }
 }
 
@@ -2138,6 +2461,13 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 378px){
+
+    .prjt-card h2 {
+        width: 18rem;
+    }
+}
+
 @media screen and (max-width: 376px){
 
     .blob1 {
@@ -2149,6 +2479,30 @@ header#projects {
 
     .footer_bottom {
         justify-content: center;
+    }
+}
+
+@media screen and (max-width: 366px){
+
+    header#projects {
+        padding: 1rem 0;
+    }
+
+    #projects h1 {
+        margin-bottom: 0.6rem;
+        font-size: 3rem;
+    }
+    #projects p {
+        font-size: 1rem;
+    }
+    #projects p::before, #projects p::after {
+        width: 3rem;
+    }
+    #projects p::before {
+        left: 0.2rem;
+    }
+    #projects p::after {
+        right: 0.2rem;
     }
 }
 
@@ -2172,6 +2526,13 @@ header#projects {
     }
     .ftr-item:first-of-type {
         margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 330px){
+
+    .prjt-card h2 {
+        width: 14rem;
     }
 }
 
