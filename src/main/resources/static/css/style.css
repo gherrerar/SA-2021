@@ -1742,6 +1742,13 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 1116px){
+
+    .grid-row > div {
+        flex: 0 0 calc(70% - 20rem);
+    }
+}
+
 @media screen and (max-width: 1052px){
 
     #account_form form {
@@ -1904,6 +1911,13 @@ header#projects {
 
     .members-cards::after {
         font-size: 18rem;
+    }
+}
+
+@media screen and (max-width: 855px){
+
+    .grid-row > div {
+        flex: 0 0 calc(80% - 20rem);
     }
 }
 
@@ -2104,6 +2118,20 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 678px){
+
+    .grid-row > div {
+        flex: 0 0 calc(100% - 10rem);
+    }
+}
+
+@media screen and (max-width: 676px){
+
+    #project_form form {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 662px){
 
     .artc-img {
@@ -2245,6 +2273,13 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 528px){
+
+    #project_form input[type="file"] ~ label ~ span {
+        width: 70%;
+    }
+}
+
 @media screen and (max-width: 502px){
 
     #projects h1 {
@@ -2265,6 +2300,7 @@ header#projects {
 
     .projects-cards {
         grid-gap: 5rem;
+        width: 100%;
     }
     .prjt-card {
         width: 100%;
@@ -2347,6 +2383,16 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 460px){
+
+    .form-group :is(button, button ~ a) {
+        width: 100%;
+    }
+    .form-group button {
+        margin-bottom: 1.5rem;
+    }
+}
+
 @media screen and (max-width: 458px){
 
     .artc-content p {
@@ -2375,6 +2421,14 @@ header#projects {
     }
     .movement-desc p {
         font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 412px){
+
+    .prjt-config {
+        justify-content: center;
+        width: 100%;
     }
 }
 
@@ -2459,12 +2513,31 @@ header#projects {
     .movement-desc p {
         font-size: 1.4rem;
     }
+
+
+    .container.white#project_details {
+        padding: 10rem 6rem;
+    }
+}
+
+@media screen and (max-width: 387px){
+
+    #project_form input[type="file"] ~ label ~ span {
+        width: 60%;
+    }
 }
 
 @media screen and (max-width: 378px){
 
     .prjt-card h2 {
         width: 18rem;
+    }
+
+    .prjt-config {
+        justify-content: space-evenly;
+    }
+    .prjt-config > div:not(:last-of-type) {
+        margin-right: 0;
     }
 }
 
