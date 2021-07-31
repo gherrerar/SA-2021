@@ -62,8 +62,6 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
-        System.out.println("aaaaa");
-        System.out.println(project.id);
 
         for (Image image : images){
             image.setProject(project);
