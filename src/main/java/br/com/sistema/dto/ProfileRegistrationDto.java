@@ -1,13 +1,13 @@
 package br.com.sistema.dto;
 
-public class UserRegistrationDto {
+public class ProfileRegistrationDto {
     private String email;
     private String password;
 
-    public UserRegistrationDto() {
+    public ProfileRegistrationDto() {
 
     }
-    public UserRegistrationDto(String username, String email, String password) {
+    public ProfileRegistrationDto(String username, String email, String password) {
         this.email = email;
         this.password = password;
     }
