@@ -33,6 +33,7 @@ build/
 .vscode/
 
 #application.properties
+#system.properties
 #src/main/resources/application.properties
 
 #upload/images
