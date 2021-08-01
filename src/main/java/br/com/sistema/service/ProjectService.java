@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProjectService {
     List<Project> findAll();
     Project findById(long id);
-    Boolean save(ProjectDto project, MultipartFile[] files) throws IOException;
-    Boolean saveEdit(ProjectDto project, MultipartFile[] files, long id) throws IOException;
+    Boolean save(ProjectDto project, MultipartFile[] files);
+    Boolean saveEdit(ProjectDto project, MultipartFile[] files, long id);
     void deleteById (long id);
 }
