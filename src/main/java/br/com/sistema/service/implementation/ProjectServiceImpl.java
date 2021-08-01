@@ -131,6 +131,10 @@ public class ProjectServiceImpl implements ProjectService {
         Path currentPath = Paths.get(".");
         Path absolutePath = currentPath.toAbsolutePath();
         String path = absolutePath + "/src/main/upload/images/";
+        File pathAsFile = new File(path);
+        if (!Files.exists(Paths.get(path))) {
+            pathAsFile.mkdir();
+        }
         ArrayList<Image> images = new ArrayList<>();
         Arrays.stream(mpFiles).forEach(file -> {
             String filename = file.getOriginalFilename();
