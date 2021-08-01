@@ -1538,6 +1538,31 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 1374px){
+
+    @media screen and (max-height: 860px){
+
+        .form-img {
+            width: 50rem;
+        }
+    
+        #account_form form {
+            height: 88rem;
+            transform: translateY(16rem);
+        }
+    }
+    @media screen and (max-height: 704px){
+
+        .form-img {
+            width: 40rem;
+        }
+    
+        #account_form form {
+            height: 80rem;
+        }
+    }
+}
+
 @media screen and (max-width: 1338px){
 
     #home h1::before {
