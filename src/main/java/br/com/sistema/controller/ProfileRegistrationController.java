@@ -1,19 +1,19 @@
 package br.com.sistema.controller;
 
-import br.com.sistema.dto.UserRegistrationDto;
-import br.com.sistema.service.UserService;
+import br.com.sistema.dto.ProfileRegistrationDto;
+import br.com.sistema.service.ProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UserRegistrationController {
+public class ProfileRegistrationController {
 
-    private UserService userService;
+    private ProfileService profileService;
 
-    public UserRegistrationController(UserService userService) {
-        this.userService = userService;
+    public ProfileRegistrationController(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
     @GetMapping("/registration")
@@ -22,10 +22,10 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<?> registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-        if (userService.findUserByEmail(registrationDto.getEmail())) {
+    public ResponseEntity<?> registerUserAccount(@ModelAttribute("user") ProfileRegistrationDto registrationDto) {
+        if (profileService.findUserByEmail(registrationDto.getEmail())) {
             try {
-                userService.save(registrationDto);
+                profileService.save(registrationDto);
             } catch (Exception e){
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar o usuário!");

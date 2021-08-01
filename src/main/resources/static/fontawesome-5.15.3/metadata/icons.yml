@@ -10280,7 +10280,7 @@ hospital-symbol:
 hospital-user:
   changes:
     - 5.7.0
-  label: Hospital with User
+  label: Hospital with Profile
   search:
     terms:
       - covid-19
@@ -10441,7 +10441,7 @@ house-user:
   changes:
     - 5.13.0
     - 5.14.0
-  label: House User
+  label: House Profile
   search:
     terms:
       - covid-19
@@ -20067,7 +20067,7 @@ user:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User
+  label: Profile
   search:
     terms:
       - account
@@ -20087,7 +20087,7 @@ user-alt:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Alternate User
+  label: Alternate Profile
   search:
     terms:
       - account
@@ -20104,7 +20104,7 @@ user-alt:
 user-alt-slash:
   changes:
     - 5.0.11
-  label: Alternate User Slash
+  label: Alternate Profile Slash
   search:
     terms:
       - account
@@ -20121,7 +20121,7 @@ user-alt-slash:
 user-astronaut:
   changes:
     - 5.0.11
-  label: User Astronaut
+  label: Profile Astronaut
   search:
     terms:
       - avatar
@@ -20137,7 +20137,7 @@ user-astronaut:
 user-check:
   changes:
     - 5.0.11
-  label: User Check
+  label: Profile Check
   search:
     terms:
       - accept
@@ -20156,7 +20156,7 @@ user-circle:
     - 5.0.11
     - 5.11.0
     - 5.11.1
-  label: User Circle
+  label: Profile Circle
   search:
     terms:
       - account
@@ -20174,7 +20174,7 @@ user-circle:
 user-clock:
   changes:
     - 5.0.11
-  label: User Clock
+  label: Profile Clock
   search:
     terms:
       - alert
@@ -20188,7 +20188,7 @@ user-clock:
 user-cog:
   changes:
     - 5.0.11
-  label: User Cog
+  label: Profile Cog
   search:
     terms:
       - admin
@@ -20202,7 +20202,7 @@ user-cog:
 user-edit:
   changes:
     - 5.0.11
-  label: User Edit
+  label: Profile Edit
   search:
     terms:
       - edit
@@ -20218,7 +20218,7 @@ user-edit:
 user-friends:
   changes:
     - 5.0.11
-  label: User Friends
+  label: Profile Friends
   search:
     terms:
       - group
@@ -20233,7 +20233,7 @@ user-friends:
 user-graduate:
   changes:
     - 5.0.11
-  label: User Graduate
+  label: Profile Graduate
   search:
     terms:
       - cap
@@ -20250,7 +20250,7 @@ user-graduate:
 user-injured:
   changes:
     - 5.4.0
-  label: User Injured
+  label: Profile Injured
   search:
     terms:
       - cast
@@ -20267,7 +20267,7 @@ user-lock:
   changes:
     - 5.0.11
     - 5.9.0
-  label: User Lock
+  label: Profile Lock
   search:
     terms:
       - admin
@@ -20304,7 +20304,7 @@ user-md:
 user-minus:
   changes:
     - 5.0.11
-  label: User Minus
+  label: Profile Minus
   search:
     terms:
       - delete
@@ -20317,7 +20317,7 @@ user-minus:
 user-ninja:
   changes:
     - 5.0.11
-  label: User Ninja
+  label: Profile Ninja
   search:
     terms:
       - assassin
@@ -20351,7 +20351,7 @@ user-plus:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Plus
+  label: Profile Plus
   search:
     terms:
       - add
@@ -20370,7 +20370,7 @@ user-secret:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Secret
+  label: Profile Secret
   search:
     terms:
       - clothing
@@ -20388,7 +20388,7 @@ user-secret:
 user-shield:
   changes:
     - 5.0.11
-  label: User Shield
+  label: Profile Shield
   search:
     terms:
       - admin
@@ -20403,7 +20403,7 @@ user-shield:
 user-slash:
   changes:
     - 5.0.11
-  label: User Slash
+  label: Profile Slash
   search:
     terms:
       - ban
@@ -20416,7 +20416,7 @@ user-slash:
 user-tag:
   changes:
     - 5.0.11
-  label: User Tag
+  label: Profile Tag
   search:
     terms:
       - avatar
@@ -20432,7 +20432,7 @@ user-tag:
 user-tie:
   changes:
     - 5.0.11
-  label: User Tie
+  label: Profile Tie
   search:
     terms:
       - avatar
@@ -20451,7 +20451,7 @@ user-times:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Remove User
+  label: Remove Profile
   search:
     terms:
       - archive

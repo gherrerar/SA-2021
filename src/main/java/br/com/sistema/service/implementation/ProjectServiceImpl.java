@@ -2,10 +2,10 @@ package br.com.sistema.service.implementation;
 
 import br.com.sistema.dto.ProjectDto;
 import br.com.sistema.model.Image;
-import br.com.sistema.model.User;
+import br.com.sistema.model.Profile;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
-import br.com.sistema.repository.UserRepository;
+import br.com.sistema.repository.ProfileRepository;
 import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectRepository projectRepository;
 
     @Autowired
-    UserRepository userRepository;
+    ProfileRepository profileRepository;
 
     @Autowired
     FileService fileService;
@@ -56,11 +56,11 @@ public class ProjectServiceImpl implements ProjectService {
     public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
         ArrayList<Image> images = processImages(mpFiles);
 
-        User user = findLoggedUser();
+        Profile profile = findLoggedUser();
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, images.get(0).getName());
+        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
         System.out.println("aaaaa");
         System.out.println(project.id);
@@ -104,10 +104,10 @@ public class ProjectServiceImpl implements ProjectService {
         return true;
     }
 
-    public User findLoggedUser () {
+    public Profile findLoggedUser () {
         Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = ((UserDetails)loggedUser).getUsername();
-        return userRepository.findByEmail(email);
+        return profileRepository.findByEmail(email);
     }
 
     public String formatDate (LocalDate date) {
