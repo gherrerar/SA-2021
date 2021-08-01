@@ -29,6 +29,16 @@ public class ProjectController {
     public ModelAndView getProjects () {
         ModelAndView my = new ModelAndView("projects");
         List<Project> projects = projectService.findAll();
+
+        boolean hasAdminRole = checkIfHasAdmRole();
+        boolean hasCreatorRole = checkIfHasCreatorRole();
+
+        if (hasCreatorRole || hasAdminRole) {
+            my.addObject("addAuthorized", true);
+        } else {
+            my.addObject("addAuthorized", false);
+        }
+
         my.addObject("projects", projects);
         return my;
     }
