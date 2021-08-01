@@ -5,12 +5,10 @@ import br.com.sistema.model.Image;
 import br.com.sistema.model.Project;
 import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -68,13 +66,15 @@ public class ProjectController {
 
     @PostMapping("/newproject")
     public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
-        if (projectService.save(projectDto, files)){
-            return ResponseEntity.ok("Projeto cadastrado com êxito");
+        boolean hasAdminRole = checkIfHasAdmRole();
+        boolean hasCreatorRole = checkIfHasCreatorRole();
+        if (hasCreatorRole || hasAdminRole) {
+            if (projectService.save(projectDto, files)){
+                return ResponseEntity.ok("Projeto cadastrado com êxito");
+            }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
     }
-
-    //TODO delete e edit
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProject (@PathVariable ("id") long id) {
@@ -107,12 +107,16 @@ public class ProjectController {
 
     @PostMapping(value="/edit/{id}")
     public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
-
-        if(projectService.saveEdit(projectDto, files, id)){
-            return "redirect:/projects/" + id;
-        } else {
-            return "redirect:/projects";
+        boolean hasAdminRole = checkIfHasAdmRole();
+        boolean hasCreatorRole = checkIfHasCreatorRole();
+        if (hasCreatorRole || hasAdminRole) {
+            if(projectService.saveEdit(projectDto, files, id)){
+                return "redirect:/projects/" + id;
+            } else {
+                return "redirect:/projects";
+            }
         }
+        return "redirect:/projects";
     }
 
     private String getLoggedUsername () {
@@ -129,5 +133,10 @@ public class ProjectController {
     private Boolean checkIfHasAdmRole () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ADMIN"));
+    }
+
+    private Boolean checkIfHasCreatorRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("CREATOR"));
     }
 }
