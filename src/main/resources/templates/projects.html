@@ -85,7 +85,7 @@
                 <a class="btn-prjt" th:href="@{'/projects/' + ${project.id}}"></a>
             </article>
         </div>
-        <a class="btn-newprjt" th:href="@{/newproject}" sec:authorize="hasRole('CREATOR' , 'ADMIN')">
+        <a class="btn-newprjt" th:href="@{/newproject}" sec:authorize="hasAnyRole('CREATOR' , 'ADMIN')">
             <i class="fas fa-plus-circle"></i>
             <span>Novo Projeto</span>
         </a>
