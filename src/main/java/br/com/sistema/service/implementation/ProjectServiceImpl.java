@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteById (long id) { projectRepository.deleteById(id); }
 
     @Override
-    public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) throws IOException {
+    public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
         ArrayList<Image> images = processImages(mpFiles);
 
         Profile profile = findLoggedUser();
@@ -75,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Boolean saveEdit(ProjectDto projectDto, MultipartFile[] mpFiles, long id) throws IOException {
+    public Boolean saveEdit(ProjectDto projectDto, MultipartFile[] mpFiles, long id) {
         fileService.deleteFilesInFolder(id);
         fileService.deleteAllById(id);
         Project project = projectService.findById(id);
@@ -127,13 +127,12 @@ public class ProjectServiceImpl implements ProjectService {
         return slicedDate[0] + " de " + month + " de " + slicedDate[2];
     }
 
-    public ArrayList<Image> processImages (MultipartFile[] mpFiles) throws IOException {
+    public ArrayList<Image> processImages (MultipartFile[] mpFiles) {
         Path currentPath = Paths.get(".");
         Path absolutePath = currentPath.toAbsolutePath();
         String path = absolutePath + "/src/main/upload/images/";
         Path folderUpload = Paths.get(path);
         if (!Files.exists(Paths.get(path))) {
-            Files.createDirectories(folderUpload);
             try {
                 Files.createDirectories(folderUpload);
             }catch (IOException ex) {
