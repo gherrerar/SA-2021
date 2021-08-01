@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -75,7 +77,7 @@ public class ProjectController {
     }
 
     @PostMapping("/newproject")
-    public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+    public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) throws IOException {
         boolean hasAdminRole = checkIfHasAdmRole();
         boolean hasCreatorRole = checkIfHasCreatorRole();
         if (hasCreatorRole || hasAdminRole) {
@@ -116,7 +118,7 @@ public class ProjectController {
     }
 
     @PostMapping(value="/edit/{id}")
-    public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+    public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) throws IOException {
         boolean hasAdminRole = checkIfHasAdmRole();
         boolean hasCreatorRole = checkIfHasCreatorRole();
         if (hasCreatorRole || hasAdminRole) {
