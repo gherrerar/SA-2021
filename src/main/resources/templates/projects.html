@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,profile-scalable=no">
@@ -87,10 +87,12 @@
                 <a class="btn-prjt" th:href="@{'/projects/' + ${project.id}}"></a>
             </article>
         </div>
-        <a class="btn-newprjt" th:href="@{/newproject}">
-            <i class="fas fa-plus-circle"></i>
-            <span>Novo Projeto</span>
-        </a>
+            <div th:if="${addAuthorized}">
+                <a class="btn-newprjt" th:href="@{/newproject}">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Novo Projeto</span>
+                </a>
+            </div>
     </section>
 
     <footer>

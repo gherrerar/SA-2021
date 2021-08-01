@@ -40,7 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/sobre", "/sobre/", "/#**").permitAll()
-//                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
+                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
+                .antMatchers("/edit").hasAnyAuthority("ADMIN", "CREATOR")
+                .antMatchers("/newproject").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers(
                 "/registration**",
                 "/js/**",
@@ -63,7 +65,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
     }
 }
 

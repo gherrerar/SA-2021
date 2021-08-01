@@ -62,9 +62,6 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
-        System.out.println("aaaaa");
-        System.out.println(project.id);
-
         for (Image image : images){
             image.setProject(project);
             fileService.save(image);
@@ -81,12 +78,8 @@ public class ProjectServiceImpl implements ProjectService {
         fileService.deleteFilesInFolder(id);
         fileService.deleteAllById(id);
         Project project = projectService.findById(id);
-        System.out.println("tamanho aqui 1:");
-        System.out.println(mpFiles.length);
         if (project != null){
             ArrayList<Image> images = processImages(mpFiles);
-            System.out.println("tamanho aqui 2:");
-            System.out.println(images.size());
             for (Image image : images){
                 image.setProject(project);
                 fileService.save(image);

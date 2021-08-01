@@ -27,10 +27,25 @@ public class ProjectController {
     @Autowired
     FileService fileService;
 
+    @GetMapping("/403")
+    public String error403(){
+        return "403";
+    }
+
     @GetMapping("/projects")
     public ModelAndView getProjects () {
         ModelAndView my = new ModelAndView("projects");
         List<Project> projects = projectService.findAll();
+
+        boolean hasAdminRole = checkIfHasAdmRole();
+        boolean hasCreatorRole = checkIfHasCreatorRole();
+
+        if (hasCreatorRole || hasAdminRole) {
+            my.addObject("addAuthorized", true);
+        } else {
+            my.addObject("addAuthorized", false);
+        }
+
         my.addObject("projects", projects);
         return my;
     }
@@ -74,8 +89,6 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
     }
 
-    //TODO delete e edit
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProject (@PathVariable ("id") long id) {
         String username = getLoggedUsername();
@@ -97,7 +110,7 @@ public class ProjectController {
         }
     }
 
-    @GetMapping(value = "/editForm/{id}")
+    @GetMapping(value = "/edit/{id}")
     public ModelAndView editForm (@PathVariable("id") long id) {
         ModelAndView my = new ModelAndView("editForm");
         Project project = projectService.findById(id);
@@ -107,12 +120,16 @@ public class ProjectController {
 
     @PostMapping(value="/edit/{id}")
     public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
-
-        if(projectService.saveEdit(projectDto, files, id)){
-            return "redirect:/projects/" + id;
-        } else {
-            return "redirect:/projects";
+        boolean hasAdminRole = checkIfHasAdmRole();
+        boolean hasCreatorRole = checkIfHasCreatorRole();
+        if (hasAdminRole || hasCreatorRole) {
+            if(projectService.saveEdit(projectDto, files, id)){
+                return "redirect:/projects/" + id;
+            } else {
+                return "redirect:/projects";
+            }
         }
+        return "redirect:/projects";
     }
 
     private String getLoggedUsername () {
@@ -129,5 +146,10 @@ public class ProjectController {
     private Boolean checkIfHasAdmRole () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ADMIN"));
+    }
+
+    private Boolean checkIfHasCreatorRole () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("CREATOR"));
     }
 }
