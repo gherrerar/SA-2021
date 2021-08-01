@@ -38,15 +38,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requiresChannel()
-                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-                .requiresSecure();
+//        http.requiresChannel()
+//                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+//                .requiresSecure();
         http.authorizeRequests()
                 .antMatchers("/", "/sobre", "/sobre/", "/#**").permitAll()
-                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
+//                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
 //                .antMatchers("/editForm").hasAnyAuthority("ADMIN", "CREATOR")
 //                .antMatchers("/edit").hasAnyAuthority("ADMIN", "CREATOR")
-                .antMatchers("/newproject").hasAnyAuthority("ADMIN", "CREATOR")
+//                .antMatchers("/newproject").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers(
                 "/registration**",
                 "/js/**",
