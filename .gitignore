@@ -32,8 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-#application.properties
-#system.properties
-#src/main/resources/application.properties
+*.properties
+src/main/resources/application.properties
 
-#upload/images
+upload/images

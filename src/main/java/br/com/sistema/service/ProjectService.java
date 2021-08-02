@@ -5,7 +5,6 @@ import br.com.sistema.dto.ProjectDto;
 import br.com.sistema.model.Project;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 

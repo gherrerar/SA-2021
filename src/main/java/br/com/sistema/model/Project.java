@@ -1,11 +1,6 @@
 package br.com.sistema.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -24,7 +19,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
-    private User user;
+    private Profile profile;
 
     public LocalDate date;
 
@@ -42,9 +37,9 @@ public class Project {
     public Project() {
     }
 
-    public Project(String title, User user, LocalDate date, String text, String formattedDate, String mainFileName) {
+    public Project(String title, Profile profile, LocalDate date, String text, String formattedDate, String mainFileName) {
         this.title = title;
-        this.user = user;
+        this.profile = profile;
         this.date = date;
         this.text = text;
         this.formattedDate = formattedDate;
@@ -67,12 +62,12 @@ public class Project {
         this.title = title;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getUser() {
+        return profile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Profile profile) {
+        this.profile = profile;
     }
 
     public LocalDate getDate() {
@@ -91,7 +86,7 @@ public class Project {
         this.text = text;
     }
 
-    public String getUserName() {return user.getEmail();}
+    public String getUserName() {return profile.getEmail();}
 
     public String getFormattedDate() {
         return formattedDate;
