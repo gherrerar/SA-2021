@@ -1,10 +1,10 @@
 package br.com.sistema.service.implementation;
 
-import br.com.sistema.dto.ProfileRegistrationDto;
+import br.com.sistema.dto.UserRegistrationDto;
 import br.com.sistema.model.Role;
-import br.com.sistema.model.Profile;
-import br.com.sistema.repository.ProfileRepository;
-import br.com.sistema.service.ProfileService;
+import br.com.sistema.model.User;
+import br.com.sistema.repository.UserRepository;
+import br.com.sistema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,39 +18,39 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class ProfileServiceImpl implements ProfileService {
+public class UserServiceImpl implements UserService {
 
-    private ProfileRepository profileRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public ProfileServiceImpl(ProfileRepository profileRepository) {
-        this.profileRepository = profileRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public Profile save(ProfileRegistrationDto registrationDto) {
-        Profile profile = new Profile(registrationDto.getEmail().toLowerCase(),
+    public User save(UserRegistrationDto registrationDto) {
+        User user = new User (registrationDto.getEmail().toLowerCase(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("USER")));
 
-        return profileRepository.save(profile);
+        return userRepository.save(user);
     }
 
     @Override
     public Boolean findUserByEmail (String email) {
-        return (profileRepository.findByEmail(email) == null);
+        return (userRepository.findByEmail(email) == null);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
-            Profile profile = profileRepository.findByEmail(email);
+            User user = userRepository.findByEmail(email);
 
-            if (profile == null){
+            if (user == null){
                 throw new UsernameNotFoundException("");
             }
 
-            return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(), mapRolesToAuthorities(profile.getRoles()));
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){

@@ -2,10 +2,10 @@ package br.com.sistema.service.implementation;
 
 import br.com.sistema.dto.ProjectDto;
 import br.com.sistema.model.Image;
-import br.com.sistema.model.Profile;
+import br.com.sistema.model.User;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
-import br.com.sistema.repository.ProfileRepository;
+import br.com.sistema.repository.UserRepository;
 import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectRepository projectRepository;
 
     @Autowired
-    ProfileRepository profileRepository;
+    UserRepository userRepository;
 
     @Autowired
     FileService fileService;
@@ -56,12 +56,14 @@ public class ProjectServiceImpl implements ProjectService {
     public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
         ArrayList<Image> images = processImages(mpFiles);
 
-        Profile profile = findLoggedUser();
+        User user = findLoggedUser();
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images.get(0).getName());
+        Project project = new Project(projectDto.getTitle(), user, date,projectDto.getText(), formattedDate, images.get(0).getName());
 
+        System.out.println("aaaaa");
+        System.out.println(project.id);
 
         for (Image image : images){
             image.setProject(project);
@@ -79,8 +81,12 @@ public class ProjectServiceImpl implements ProjectService {
         fileService.deleteFilesInFolder(id);
         fileService.deleteAllById(id);
         Project project = projectService.findById(id);
+        System.out.println("tamanho aqui 1:");
+        System.out.println(mpFiles.length);
         if (project != null){
             ArrayList<Image> images = processImages(mpFiles);
+            System.out.println("tamanho aqui 2:");
+            System.out.println(images.size());
             for (Image image : images){
                 image.setProject(project);
                 fileService.save(image);
@@ -98,10 +104,10 @@ public class ProjectServiceImpl implements ProjectService {
         return true;
     }
 
-    public Profile findLoggedUser () {
+    public User findLoggedUser () {
         Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = ((UserDetails)loggedUser).getUsername();
-        return profileRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public String formatDate (LocalDate date) {
