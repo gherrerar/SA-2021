@@ -23,6 +23,12 @@ public class MainController {
         return my;
     }
 
+    @GetMapping("/403")
+    public String error403(){
+        return "403";
+    }
+
+
     @GetMapping("/sobre")
     public String sobre() {
         return "sobre";

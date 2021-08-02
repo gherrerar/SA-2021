@@ -27,10 +27,6 @@ public class ProjectController {
     @Autowired
     FileService fileService;
 
-    @GetMapping("/403")
-    public String error403(){
-        return "403";
-    }
 
     @GetMapping("/projects")
     public ModelAndView getProjects () {
@@ -119,17 +115,17 @@ public class ProjectController {
     }
 
     @PostMapping(value="/edit/{id}")
-    public String update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+    public ResponseEntity<?> update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
         boolean hasAdminRole = checkIfHasAdmRole();
         boolean hasCreatorRole = checkIfHasCreatorRole();
         if (hasAdminRole || hasCreatorRole) {
             if(projectService.saveEdit(projectDto, files, id)){
-                return "redirect:/projects/" + id;
+                return ResponseEntity.ok("Projeto editado com êxito");
             } else {
-                return "redirect:/projects";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao editar o projeto!");
             }
         }
-        return "redirect:/projects";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao editar o projeto!");
     }
 
     private String getLoggedUsername () {
