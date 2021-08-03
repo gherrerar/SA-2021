@@ -15,6 +15,9 @@ $(document).ready(function () {
 });
 
 function fire_ajax_submit(formData, id) {
+  $(".form-group button").attr("disabled", true)
+  $(".form-group button ~ a").addClass("disabled")
+  $(".loading-icon").css("opacity", 1)
   $.ajax({
     type: "POST",
     url: "/edit/" + id,
@@ -24,6 +27,10 @@ function fire_ajax_submit(formData, id) {
     cache: false,
     timeout: 600000,
     complete: function (e, xhr) {
+      $(".form-group button").attr("disabled", false)
+      $(".form-group button ~ a").removeClass("disabled")
+      $(".loading-icon").css("opacity", 0)
+
       if (e.status == '200') {
             window.location = '/projects/' + id;
       } else {
