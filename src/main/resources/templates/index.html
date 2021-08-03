@@ -102,70 +102,17 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" th:each="project : ${projects}">
                     <article class="article-card">
                         <div class="artc-img">
-                            <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                            <img th:src="@{${'/upload/images/' + project.getMainFileName()}}">
                         </div>
 
                         <div class="artc-content">
-                            <span>1 de Julho de 2021</span>
-                            <h2>Projeto 1</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
-                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
-                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
-                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="swiper-slide">
-                    <article class="article-card">
-                        <div class="artc-img">
-                            <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
-                        </div>
-
-                        <div class="artc-content">
-                            <span>2 de Julho de 2021</span>
-                            <h2>Projeto 2</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
-                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
-                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
-                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="swiper-slide">
-                    <article class="article-card">
-                        <div class="artc-img">
-                            <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
-                        </div>
-
-                        <div class="artc-content">
-                            <span>3 de Julho de 2021</span>
-                            <h2>Projeto 3</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
-                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
-                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
-                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="swiper-slide">
-                    <article class="article-card">
-                        <div class="artc-img">
-                            <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
-                        </div>
-
-                        <div class="artc-content">
-                            <span>4 de Julho de 2021</span>
-                            <h2>Projeto 4</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id condimentum nunc, ut placerat mauris. Aenean vel ultrices velit. 
-                                Nunc convallis venenatis quam fermentum aliquet. Suspendisse quis magna sit amet orci volutpat pretium. Duis vel dapibus lacus. 
-                                Donec turpis ex, tristique ut diam non, auctor elementum dui.</p>
-                            <a class="card-btn-readMore" th:href="@{/}">Leia mais</a>
+                            <span th:text="${formattedDate}"></span>
+                            <h2 th:text="${project.title}"></h2>
+                            <p th:text="${project.text}"></p>
+                            <a class="card-btn-readMore" th:href="@{'/projects/' + ${project.id}}">Leia mais</a>
                         </div>
                     </article>
                 </div>

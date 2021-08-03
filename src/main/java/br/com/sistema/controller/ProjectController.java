@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class ProjectController {
@@ -31,7 +32,7 @@ public class ProjectController {
     @GetMapping("/projects")
     public ModelAndView getProjects () {
         ModelAndView my = new ModelAndView("projects");
-        List<Project> projects = projectService.findAll();
+        List<Project> allProjects = projectService.findAll();
 
         boolean hasAdminRole = checkIfHasAdmRole();
         boolean hasCreatorRole = checkIfHasCreatorRole();
@@ -42,7 +43,7 @@ public class ProjectController {
             my.addObject("addAuthorized", false);
         }
 
-        my.addObject("projects", projects);
+        my.addObject("projects", allProjects);
         return my;
     }
 
