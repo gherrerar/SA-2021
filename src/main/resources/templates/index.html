@@ -82,10 +82,14 @@
             data-allowfullscreen="native" data-fit="cover" data-transition="slide" data-transitionduration="400" data-loop="true" data-autoplay="false"
             data-arrows="true" data-click="true" data-swipe="true"
             >
-                <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
+                <!-- <img th:src="@{https://s.fotorama.io/1.jpg}" alt="">
                 <img th:src="@{https://s.fotorama.io/2.jpg}" alt="">
                 <img th:src="@{https://s.fotorama.io/3.jpg}" alt="">
-                <img th:src="@{https://s.fotorama.io/4.jpg}" alt="">
+                <img th:src="@{https://s.fotorama.io/4.jpg}" alt=""> -->
+                <a th:href="@{https://youtu.be/ZXJaLuh2ejI}"></a>
+                <img th:src="@{/img/minecraft_streets.png}" alt="">
+                <img th:src="@{/img/nicolas_justi_2a.png}" alt="">
+                <img th:src="@{/img/laura_ferrari_3c.jpg}" alt="">
             </div>
         </div>
         
@@ -109,7 +113,7 @@
                         </div>
 
                         <div class="artc-content">
-                            <span th:text="${formattedDate}"></span>
+                            <span th:text="${project.formattedDate}"></span>
                             <h2 th:text="${project.title}"></h2>
                             <p th:text="${project.text}"></p>
                             <a class="card-btn-readMore" th:href="@{'/projects/' + ${project.id}}">Leia mais</a>

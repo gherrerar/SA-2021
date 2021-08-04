@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/fontawesome-5.15.3/**",
                 "/sweetalert2/**",
                 "/favicon/**",
-                "/photos/**").permitAll()
+                "/upload/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
