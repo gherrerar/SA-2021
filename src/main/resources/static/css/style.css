@@ -346,6 +346,7 @@ span.initial {
 }
 
 .article-card {
+    position: relative;
     display: flex;
     align-items: center;
     width: 1280px;
@@ -387,6 +388,7 @@ span.initial {
 }
 
 .artc-content {
+    position: relative;
     padding: 8rem;
     padding-left: 0;
 }
@@ -1310,6 +1312,7 @@ header#projects {
     font-size: 1.6rem;
     font-weight: 300;
 }
+.artc-content p a,
 .prjt-content p a {
     text-decoration: none;
     color: var(--color-green);
@@ -1319,6 +1322,7 @@ header#projects {
     background-size: 0% 2px;
     transition: background-size var(--transition-speed) ease-in-out;
 }
+.artc-content p a:is(:hover, :focus),
 .prjt-content p a:is(:hover, :focus) {
     background-size: 100% 2px;
 }
@@ -1584,6 +1588,9 @@ header#projects {
         width: 1100px;
     }
 
+    .artc-content h2 {
+        padding-right: 20rem;
+    }
     .artc-content p {
         width: 62rem;
     }
@@ -1740,6 +1747,10 @@ header#projects {
     }
     .artc-content > * {
         text-align: center;
+    }
+    .artc-content h2 {
+        padding: 0;
+        width: 80rem;
     }
     .artc-content p {
         width: 80rem;
@@ -1963,6 +1974,21 @@ header#projects {
     }
 }
 
+@media screen and (max-width: 1101px) {
+
+    .article-card {
+        width: 100%;
+    }
+    .artc-content {
+        width: 100%;
+    }
+    .artc-content h2,
+    .artc-content p {
+        padding: 0 10rem;
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 1018px){
 
     .members-cards::after {
@@ -2117,7 +2143,6 @@ header#projects {
     }
     .artc-content p {
         font-size: 2.3rem;
-        width: 60rem;
     }
 
 
@@ -2336,7 +2361,10 @@ header#projects {
     }
     .artc-content p {
         font-size: 2rem;
-        width: 46rem;
+    }
+    .artc-content h2,
+    .artc-content p {
+        padding: 0 6rem;
     }
 
     @media screen and (max-height: 855px){
@@ -2630,13 +2658,6 @@ header#projects {
     }
     .form-group button {
         margin-bottom: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 458px){
-
-    .artc-content p {
-        width: 30rem;
     }
 }
 

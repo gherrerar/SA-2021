@@ -119,6 +119,28 @@
     </footer>
 
     <!--JS-->
+    <script type="text/javascript">
+      // window.onload = function(){
+        let prjtText = document.querySelector(".prjt-content p")
+        prjtText.innerHTML = checkURL(prjtText.innerText);
+      // }
+    
+      function checkURL(textCheck) {
+          var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      
+          return textCheck.replace(urlRegex, (url) => {
+          
+              var urlText = url.replace("https://", '')
+              
+              if (url.lastIndexOf("?") == (url.lenght - 1)){
+                  url = url.substring(0, url.lenght)
+              }
+              else {
+                  return "<a class='link' href=" + url + " target='_blank'>" + urlText + "</a>";
+              }
+          })
+      }
+    </script>
     <script th:src="@{/js/script.js}"></script>
     <script th:src="@{/js/projectTitle.js}"></script>
 
