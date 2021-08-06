@@ -44,6 +44,7 @@ for (let i = 0; i < prjtImg.length; i++){
 }
 
 
+let saveBtn = document.querySelector(".form-group button[type='submit']")
 let titleInput = document.querySelector(".form-group > input[type='text']")
 let fileInput = document.querySelector(".form-group > input[type='file']")
 let fileSpan = ''
@@ -64,5 +65,13 @@ fileInput.addEventListener("change", function(){
     else {
         fileSpan = fileInput.files[0].name
     }
+    document.querySelector("#project_form input[type='file'] ~ label ~ span").style.color = "var(--color-green)"
     document.querySelector("#project_form input[type='file'] ~ label ~ span").innerHTML = fileSpan || ''
+})
+saveBtn.addEventListener("click", function(){
+
+    if (fileInput.files.length == 0) {
+        document.querySelector("#project_form input[type='file'] ~ label ~ span").style.color = "rgba(255, 189, 69, 1)"
+        document.querySelector("#project_form input[type='file'] ~ label ~ span").innerHTML = "<i class='fas fa-exclamation-circle'></i>" + " Insira, no mínimo, uma imagem"
+    }
 })
