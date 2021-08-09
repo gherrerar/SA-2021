@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="artc-content">
-                            <span th:text="${formattedDate}"></span>
+                            <span th:text="${project.formattedDate}"></span>
                             <h2 th:text="${project.title}"></h2>
                             <p th:text="${project.text}"></p>
                             <a class="card-btn-readMore" th:href="@{'/projects/' + ${project.id}}">Leia mais</a>

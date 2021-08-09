@@ -37,13 +37,13 @@ public class Project {
     public Project() {
     }
 
-    public Project(String title, Profile profile, LocalDate date, String text, String formattedDate, String mainFileName) {
+    public Project(String title, Profile profile, LocalDate date, String text, String formattedDate, List<Image> images ) {
         this.title = title;
         this.profile = profile;
         this.date = date;
         this.text = text;
         this.formattedDate = formattedDate;
-        this.mainFileName = mainFileName;
+        this.images = images;
     }
 
     public List<Image> getImages() {

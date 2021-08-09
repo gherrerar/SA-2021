@@ -9,20 +9,17 @@ public class Image {
     @GeneratedValue (strategy = GenerationType.AUTO)
     public Long id;
 
-    private String name;
-
-    private String path;
+    private String link;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="project_id", nullable = true)
+    @JoinColumn(name="project_id")
     private Project project;
 
     public Image() {
     }
 
-    public Image(String name, String path) {
-        this.name = name;
-        this.path = path;
+    public Image(String link) {
+        this.link = link;
     }
 
     public Project getProject() {
@@ -33,19 +30,11 @@ public class Image {
         this.project = project;
     }
 
-    public String getName() {
-        return name;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getPath() {
-        return path;
+    public String getLink() {
+        return link;
     }
 }

@@ -6,7 +6,6 @@ import br.com.sistema.model.Profile;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
 import br.com.sistema.repository.ProfileRepository;
-import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,9 +33,6 @@ public class ProjectServiceImpl implements ProjectService {
     ProfileRepository profileRepository;
 
     @Autowired
-    FileService fileService;
-
-    @Autowired
     ProjectService projectService;
 
     @Override
@@ -53,43 +49,28 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteById (long id) { projectRepository.deleteById(id); }
 
     @Override
-    public Boolean save(ProjectDto projectDto, MultipartFile[] mpFiles) {
-        ArrayList<Image> images = processImages(mpFiles);
+    public Boolean save(ProjectDto projectDto, List<String> linkList) {
+        ArrayList<Image> images = new ArrayList<>();
+        linkList.forEach(link -> {
+            images.add(new Image(link));
+        });
 
         Profile profile = findLoggedUser();
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images.get(0).getName());
-
-        for (Image image : images){
-            image.setProject(project);
-            fileService.save(image);
-        }
-        List<Image> set = new ArrayList<>(images);
-        project.setImages(set);
+        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images);
         projectRepository.save(project);
 
         return true;
     }
 
     @Override
-    public Boolean saveEdit(ProjectDto projectDto, MultipartFile[] mpFiles, long id) {
-        fileService.deleteFilesInFolder(id);
-        fileService.deleteAllById(id);
+    public Boolean saveEdit(ProjectDto projectDto, long id) {
         Project project = projectService.findById(id);
         if (project != null){
-            ArrayList<Image> images = processImages(mpFiles);
-            for (Image image : images){
-                image.setProject(project);
-                fileService.save(image);
-            }
-
-            List<Image> set = new ArrayList<>(images);
             project.setText(projectDto.getText());
             project.setTitle(projectDto.getTitle());
-            project.setMainFileName(images.get(0).getName());
-            project.setImages(set);
         } else {
             return false;
         }
@@ -124,28 +105,5 @@ public class ProjectServiceImpl implements ProjectService {
             default -> "?";
         };
         return slicedDate[0] + " de " + month + " de " + slicedDate[2];
-    }
-
-    public ArrayList<Image> processImages (MultipartFile[] mpFiles) {
-        Path currentPath = Paths.get(".");
-        Path absolutePath = currentPath.toAbsolutePath();
-        String path = absolutePath + "/src/main/upload/images/";
-        ArrayList<Image> images = new ArrayList<>();
-        Arrays.stream(mpFiles).forEach(file -> {
-            String filename = file.getOriginalFilename();
-            String suffixLast = filename.substring(filename.lastIndexOf("."));
-            UUID uuid = UUID.randomUUID();
-            String newFileName = uuid+suffixLast;
-            images.add(new Image(newFileName, path));
-            if (file.getSize() < 20000000) {
-                try {
-                    Path dest = Paths.get( path + File.separator + newFileName);
-                    Files.copy(file.getInputStream(), dest, StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return images;
     }
 }

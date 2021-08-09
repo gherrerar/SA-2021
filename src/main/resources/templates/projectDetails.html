@@ -68,7 +68,7 @@
           <div class="img-grid">
             <div class="grid-row">
               <div th:each="image : ${project.images}">
-                <img th:src="@{${'/upload/images/' + image.name}}">
+                <img th:src="@{${image.getLink()}}">
               </div>
             </div>
           </div>

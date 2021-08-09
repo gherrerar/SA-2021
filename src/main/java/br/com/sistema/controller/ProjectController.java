@@ -3,7 +3,6 @@ package br.com.sistema.controller;
 import br.com.sistema.dto.ProjectDto;;
 import br.com.sistema.model.Image;
 import br.com.sistema.model.Project;
-import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,6 @@ import java.util.Random;
 public class ProjectController {
     @Autowired
     ProjectService projectService;
-
-    @Autowired
-    FileService fileService;
-
 
     @GetMapping("/projects")
     public ModelAndView getProjects () {
@@ -51,8 +46,6 @@ public class ProjectController {
     public ModelAndView getProjectDetails (@PathVariable ("id") long id) {
         ModelAndView my = new ModelAndView("projectDetails");
         Project project = projectService.findById(id);
-        List<Image> images = fileService.findAllByProjectId(id);
-        System.out.println(images.size());
 
         String username = getLoggedUsername();
         boolean hasAdminRole = checkIfHasAdmRole();
@@ -64,7 +57,6 @@ public class ProjectController {
         }
 
         my.addObject("project", project);
-        my.addObject("images", images);
         return my;
     }
 
@@ -79,8 +71,9 @@ public class ProjectController {
     }
 
     @PostMapping("/newproject")
-    public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
-        if (projectService.save(projectDto, files)){
+    public ResponseEntity<?> saveProject(@ModelAttribute("project") ProjectDto projectDto, @RequestParam(value="linkList") List<String> linkList) {
+        System.out.println(linkList);
+        if (projectService.save(projectDto, linkList)){
             return ResponseEntity.ok("Projeto cadastrado com êxito");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
@@ -93,12 +86,8 @@ public class ProjectController {
         boolean hasAdminRole = checkIfHasAdmRole();
         if (project != null) {
             if (username.equals(project.getUserName()) || hasAdminRole) {
-                if(fileService.deleteFilesInFolder(id)) {
                     projectService.deleteById(id);
                     return ResponseEntity.ok("Projeto deletado com êxito");
-                } else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar o projeto!");
-                }
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Você não tem permissão de deletar este projeto!");
             }
@@ -116,11 +105,11 @@ public class ProjectController {
     }
 
     @PostMapping(value="/edit/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto, @RequestParam("files") MultipartFile[] files) {
+    public ResponseEntity<?> update(@PathVariable("id") long id, @ModelAttribute("project") ProjectDto projectDto) {
         boolean hasAdminRole = checkIfHasAdmRole();
         boolean hasCreatorRole = checkIfHasCreatorRole();
         if (hasAdminRole || hasCreatorRole) {
-            if(projectService.saveEdit(projectDto, files, id)){
+            if(projectService.saveEdit(projectDto, id)){
                 return ResponseEntity.ok("Projeto editado com êxito");
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao editar o projeto!");
