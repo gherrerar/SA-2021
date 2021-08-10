@@ -6,19 +6,12 @@ import br.com.sistema.model.Profile;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
 import br.com.sistema.repository.ProfileRepository;
+import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -34,6 +27,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    FileService fileService;
 
     @Override
     public List<Project> findAll() {
@@ -59,18 +55,31 @@ public class ProjectServiceImpl implements ProjectService {
         LocalDate date = LocalDate.now();
         String formattedDate = formatDate(date);
 
-        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate, images);
+        Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate);
+
+        images.forEach(image -> {
+            image.setProject(project);
+        });
+
+        project.setImages(images);
+
         projectRepository.save(project);
 
         return true;
     }
 
     @Override
-    public Boolean saveEdit(ProjectDto projectDto, long id) {
+    public Boolean saveEdit(ProjectDto projectDto, long id, List<String> linkList) {
+        fileService.deleteAllById(id);
         Project project = projectService.findById(id);
         if (project != null){
             project.setText(projectDto.getText());
             project.setTitle(projectDto.getTitle());
+            ArrayList<Image> images = new ArrayList<>();
+            linkList.forEach(link -> {
+                images.add(new Image(link, project));
+            });
+            project.setImages(images);
         } else {
             return false;
         }
@@ -85,7 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public String formatDate (LocalDate date) {
-        DateTimeFormatter  dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(dateFormat);
         String[] slicedDate = formattedDate.split("/");
         String monthNumber = slicedDate[1];

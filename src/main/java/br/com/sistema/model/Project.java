@@ -25,7 +25,6 @@ public class Project {
 
     public String formattedDate;
 
-    private String mainFileName;
 
     @NotBlank
     @Lob
@@ -37,13 +36,12 @@ public class Project {
     public Project() {
     }
 
-    public Project(String title, Profile profile, LocalDate date, String text, String formattedDate, List<Image> images ) {
+    public Project(String title, Profile profile, LocalDate date, String text, String formattedDate ) {
         this.title = title;
         this.profile = profile;
         this.date = date;
         this.text = text;
         this.formattedDate = formattedDate;
-        this.images = images;
     }
 
     public List<Image> getImages() {
@@ -94,17 +92,5 @@ public class Project {
 
     public void setFormattedDate(String formattedDate) {
         this.formattedDate = formattedDate;
-    }
-
-    public String getMainFileName() {
-        return mainFileName;
-    }
-
-    public void setMainFileName(String mainFileName) {
-        this.mainFileName = mainFileName;
-    }
-
-    public void clearImages() {
-        images.removeAll(images);
     }
 }

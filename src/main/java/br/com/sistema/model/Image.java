@@ -22,6 +22,11 @@ public class Image {
         this.link = link;
     }
 
+    public Image(String link, Project project) {
+        this.link = link;
+        this.project = project;
+    }
+
     public Project getProject() {
         return project;
     }

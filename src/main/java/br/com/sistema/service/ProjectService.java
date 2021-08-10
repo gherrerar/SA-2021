@@ -12,6 +12,6 @@ public interface ProjectService {
     List<Project> findAll();
     Project findById(long id);
     Boolean save(ProjectDto project, List<String> linkList);
-    Boolean saveEdit(ProjectDto project, long id);
+    Boolean saveEdit(ProjectDto project, long id, List<String> linkList);
     void deleteById (long id);
 }
