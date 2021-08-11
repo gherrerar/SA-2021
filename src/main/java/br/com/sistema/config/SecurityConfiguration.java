@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/projects").authenticated()
                 .antMatchers("/delete/**").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers("/newproject").hasAnyAuthority("ADMIN", "CREATOR")
