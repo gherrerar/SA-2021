@@ -39,11 +39,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/sobre", "/sobre/", "/#**").permitAll()
-                .antMatchers("/delete").hasAnyAuthority("ADMIN", "CREATOR")
+                .antMatchers("/delete/**").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers("/newproject").hasAnyAuthority("ADMIN", "CREATOR")
-                .antMatchers(
+                .antMatchers("/**",
+                "/sobre**",
                 "/registration**",
                 "/js/**",
                 "/css/**",
@@ -52,8 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/swiper-6.7.1/**",
                 "/fontawesome-5.15.3/**",
                 "/sweetalert2/**",
-                "/favicon/**",
-                "/upload/images/**").permitAll()
+                "/favicon/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
