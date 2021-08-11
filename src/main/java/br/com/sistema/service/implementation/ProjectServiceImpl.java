@@ -6,7 +6,6 @@ import br.com.sistema.model.Profile;
 import br.com.sistema.repository.ProjectRepository;
 import br.com.sistema.model.Project;
 import br.com.sistema.repository.ProfileRepository;
-import br.com.sistema.service.FileService;
 import br.com.sistema.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +26,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectService projectService;
-
-    @Autowired
-    FileService fileService;
 
     @Override
     public List<Project> findAll() {
@@ -57,10 +53,6 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project project = new Project(projectDto.getTitle(), profile, date,projectDto.getText(), formattedDate);
 
-        images.forEach(image -> {
-            image.setProject(project);
-        });
-
         project.setImages(images);
 
         projectRepository.save(project);
@@ -70,14 +62,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Boolean saveEdit(ProjectDto projectDto, long id, List<String> linkList) {
-        fileService.deleteAllById(id);
         Project project = projectService.findById(id);
+
         if (project != null){
             project.setText(projectDto.getText());
             project.setTitle(projectDto.getTitle());
             ArrayList<Image> images = new ArrayList<>();
             linkList.forEach(link -> {
-                images.add(new Image(link, project));
+                images.add(new Image(link));
             });
             project.setImages(images);
         } else {
