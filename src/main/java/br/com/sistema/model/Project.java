@@ -27,7 +27,6 @@ public class Project {
 
 
     @NotBlank
-    @Lob
     private String text;
 
     @OneToMany(cascade = CascadeType.ALL)
