@@ -83,9 +83,9 @@
             data-arrows="true" data-click="true" data-swipe="true"
             >
                 <a th:href="@{https://youtu.be/ZXJaLuh2ejI}"></a>
-                <img th:src="@{/img/minecraft_streets.png}" alt="">
+                <img th:src="@{/img/cristiano_2b.jpeg}" alt="">
                 <img th:src="@{/img/nicolas_justi_2a.png}" alt="">
-                <img th:src="@{/img/laura_ferrari_3c.jpg}" alt="">
+                <img th:src="@{/img/guilherme_silva_2b.jpg}" alt="">
             </div>
         </div>
         
@@ -105,7 +105,7 @@
                 <div class="swiper-slide" th:each="project : ${projects}">
                     <article class="article-card">
                         <div class="artc-img">
-                            <img th:src="@{${'/upload/images/' + project.getMainFileName()}}">
+                            <img th:src="@{${project.images[0].link}}" alt="">
                         </div>
 
                         <div class="artc-content">
