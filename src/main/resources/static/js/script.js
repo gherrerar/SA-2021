@@ -28,8 +28,6 @@ let imgs = document.querySelectorAll(".prjt-img > img")
 for (let i = 0; i < prjtImg.length; i++){
 
     document.addEventListener("DOMContentLoaded", function(){
-        // let imgs = prjtImg[i].getElementsByTagName("img")
-        console.log("Img " + i + ": " + colorThief.getColor(imgs[i]))
         
         if (imgs[i].complete) {
             color = colorThief.getColor(imgs[i]);
